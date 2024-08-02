@@ -21,12 +21,17 @@ public class GridManager : MonoBehaviour
     private readonly HashSet<Vector2> _occupiedCells = new();
     private readonly List<Enemy> _enemies = new();
     private Pathfinding _pathfinding;
-
-
+    
+    [SerializeField] private Color previewColorCanPlace = new Color(0, 1, 0, 0.5f); // Verde semitrasparente
+    [SerializeField] private Color previewColorCannotPlace = new Color(1, 0, 0, 0.5f); // Rosso semitrasparente
+    [SerializeField] private GameObject turretPreviewPrefab;
+    private GameObject _currentTurretPreview;
+    
     void Start()
     {
         tilePrefab.transform.localScale = new Vector3(tileSize, tileSize, tileSize);
         turretPrefab.transform.localScale = new Vector3(tileSize*2, tileSize*2, tileSize);
+        turretPreviewPrefab.transform.localScale = turretPrefab.transform.localScale;
         _pathfinding = new Pathfinding(numHorizontalTiles, numVerticalTiles, tileSize);
         GenerateGrid();
         CenterCamera();
@@ -93,6 +98,31 @@ public class GridManager : MonoBehaviour
                 _occupiedCells.Remove(pos);
             }
             Debug.Log("Cannot place turret, no valid path for enemies.");
+        }
+    }
+
+    public void PreviewTurret(Vector2 gridPosition)
+    {
+        if (_currentTurretPreview is null)
+        {
+            _currentTurretPreview = Instantiate(turretPreviewPrefab, Vector3.zero, Quaternion.identity);
+        }
+
+        bool canPlace = CanPlaceTurret(gridPosition);
+        _currentTurretPreview.transform.position = gridPosition * tileSize + new Vector2(tileSize / 2, - tileSize / 2);
+        _currentTurretPreview.SetActive(true);
+    
+        // Cambia il colore del `SpriteRenderer` in base alla possibilità di posizionamento
+        var spriteRenderer = _currentTurretPreview.GetComponent<SpriteRenderer>();
+        spriteRenderer.color = canPlace ? previewColorCanPlace : previewColorCannotPlace;
+    }
+
+    public void HideTurretPreview()
+    {
+        if (_currentTurretPreview is not null)
+        {
+            _currentTurretPreview.SetActive(false);
+            _currentTurretPreview = null;
         }
     }
 

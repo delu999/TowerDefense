@@ -8,10 +8,28 @@ public class PlayerInput : MonoBehaviour
 
     void Update()
     {
-        if (!Input.GetMouseButtonDown(0)) return;
-        
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+        Vector2 gridPosition = CalculateTurretGridPosition(mousePosition);
+
+        if (gridPosition.x < -1 || gridPosition.y < -1 || gridPosition.x > gridManager.numHorizontalTiles ||
+            gridPosition.y > gridManager.numVerticalTiles)
+        {
+            gridManager.HideTurretPreview();
+            return;
+        }
         
+        if (Input.GetMouseButtonDown(0))
+        {
+            gridManager.PlaceTurret(gridPosition);
+            return;
+        }
+        
+        gridManager.PreviewTurret(gridPosition);
+    }
+
+    private Vector2 CalculateTurretGridPosition(Vector2 mousePosition)
+    {
         var gridPosition = new Vector2(
             Mathf.Round(mousePosition.x / gridManager.tileSize), 
             Mathf.Round(mousePosition.y / gridManager.tileSize));
@@ -31,7 +49,7 @@ public class PlayerInput : MonoBehaviour
             // Quadrante in basso a sinistra
             gridPosition += new Vector2(-1, 0);
         }
-        
-        gridManager.PlaceTurret(gridPosition);
+
+        return gridPosition;
     }
 }
