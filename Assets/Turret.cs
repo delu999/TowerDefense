@@ -16,7 +16,7 @@ public class Turret : MonoBehaviour
         if (targetEnemy is null || Vector2.Distance(transform.position, targetEnemy.transform.position) > range) {
             FindTarget();
         }
-
+        
         if (targetEnemy != null && fireCountdown <= 0f) {
             Shoot();
             fireCountdown = 1f / fireRate;

@@ -1,6 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
+using Random = UnityEngine.Random;
 
 public class GridManager : MonoBehaviour
 {
@@ -11,6 +15,7 @@ public class GridManager : MonoBehaviour
     [SerializeField] private Transform mainCamera;
     [SerializeField] private Enemy enemyPrefab;
     [SerializeField] private GameObject turretPrefab;
+    [SerializeField] private LayerMask colliderMask;
     
     private readonly Dictionary<Vector2, Tile> _tiles = new();
     private readonly HashSet<Vector2> _occupiedCells = new();
@@ -60,7 +65,7 @@ public class GridManager : MonoBehaviour
             spawnedEnemy.Init(_occupiedCells, this);
             _enemies.Add(spawnedEnemy);
 
-            yield break; // Wait for 2 seconds before spawning the next enemy
+            yield return new WaitForSeconds(2f); // Wait for 2 seconds before spawning the next enemy
         }
     }
 
@@ -115,21 +120,10 @@ public class GridManager : MonoBehaviour
         return true;
     }
 
-    private bool IsOccupied(Vector2 position) {
-        Debug.Log("isOcc");
-        var turretCollider = Physics2D.OverlapBox(position,
-            new Vector2(tileSize, tileSize),
-            0f,
-            LayerMask.GetMask("Turret"));
-        
-        
-        if (turretCollider is not null) {
-            return true;
-        }
-        Debug.Log("non occupata");
-
-        var enemyCollider = Physics2D.OverlapCircle(position, tileSize / 2, LayerMask.GetMask("Enemy"));
-        return enemyCollider is not null;
+    private bool IsOccupied(Vector2 position)
+    {
+        position *= tileSize;
+        return Physics2D.OverlapCircle(position, tileSize / 2, colliderMask) is not null;
     }
 
     private bool IsPathAvailable() {
