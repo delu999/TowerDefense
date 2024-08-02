@@ -18,7 +18,7 @@ public class Turret : MonoBehaviour
         }
         
         if (targetEnemy != null && fireCountdown <= 0f) {
-            Shoot();
+            //Shoot();
             fireCountdown = 1f / fireRate;
         }
 

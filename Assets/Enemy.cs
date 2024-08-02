@@ -45,7 +45,7 @@ public class Enemy : MonoBehaviour
     private void FixedUpdate() {
         if (_isRecalculatingPath) return;
 
-        if (_path == null || _pathIndex >= _path.Count) return;
+        if (_path is null || _pathIndex >= _path.Count) return;
         
         var direction = (_path[_pathIndex] - (Vector2)transform.position).normalized;
         rb.velocity = direction * moveSpeed;
@@ -54,6 +54,11 @@ public class Enemy : MonoBehaviour
     private IEnumerator CalculatePathCoroutine(HashSet<Vector2> occupiedCells) {
         _isRecalculatingPath = true;
         _path = _pathfinding.FindPath(transform.position, _targetPosition, occupiedCells);
+        Debug.Log(_path.Count);
+        foreach (var variable in _path)
+        {
+            Debug.Log(variable);
+        }
         _pathIndex = 0;
         _isRecalculatingPath = false;
 

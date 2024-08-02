@@ -84,9 +84,8 @@ public class GridManager : MonoBehaviour
             _occupiedCells.Add(pos);
         }
 
-        if (IsPathAvailable() || true) {
+        if (IsPathAvailable()) {
             Vector3 turretPosition = gridPosition * tileSize + new Vector2(tileSize / 2, -1 * tileSize / 2);
-            Debug.Log(turretPosition);
             Instantiate(turretPrefab, turretPosition, Quaternion.identity);
             RecalculatePathsForAllEnemies();
         } else {
@@ -106,7 +105,6 @@ public class GridManager : MonoBehaviour
         };
         
         foreach (var pos in turretCells) {
-            Debug.Log(pos);
             if (!_tiles.ContainsKey(pos)) {
                 Debug.Log("Tile not found: " + pos);
                 return false;
@@ -128,7 +126,7 @@ public class GridManager : MonoBehaviour
 
     private bool IsPathAvailable() {
         var startPosition = new Vector2(0, 0);
-        var goalPosition = new Vector2((numHorizontalTiles - 1) / tileSize, 0);
+        var goalPosition = new Vector2((numHorizontalTiles - 1) * tileSize, 0);
 
         return _pathfinding.FindPath(startPosition, goalPosition, _occupiedCells) != null;
     }

@@ -55,14 +55,12 @@ public class Pathfinding
 
     private List<Vector2> ReconstructPath(Dictionary<Vector2, Vector2> cameFrom, Vector2 current)
     {
-        current = GetTransformPosition(current);
-        var path = new List<Vector2> { current };
+        var path = new List<Vector2> { GetTransformPosition(current) };
 
         while (cameFrom.ContainsKey(current))
         {
             current = cameFrom[current];
-            current = GetTransformPosition(current);
-            path.Add(current);
+            path.Add(GetTransformPosition(current));
         }
         
         path.Reverse();
