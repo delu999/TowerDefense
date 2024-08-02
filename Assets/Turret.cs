@@ -49,7 +49,6 @@ public class Turret : MonoBehaviour
             _targetEnemy = null;
             return;
         }
-        Debug.Log("Torvato!");
         
         _targetEnemy = colliders[0].GetComponent<Enemy>();
     }
@@ -66,8 +65,6 @@ public class Turret : MonoBehaviour
             _targetEnemy = null;
             return;
         }
-        
-        Debug.Log("Sparo!");
 
         Bullet bulletObj = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
         bulletObj.Init( transform, _targetEnemy.transform, range);

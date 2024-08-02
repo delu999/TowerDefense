@@ -16,25 +16,20 @@ public class PlayerInput : MonoBehaviour
             Mathf.Round(mousePosition.x / gridManager.tileSize), 
             Mathf.Round(mousePosition.y / gridManager.tileSize));
         
-        // transpose mouse position
-        float x = Mathf.Abs(mousePosition.x - (gridManager.tileSize * gridPosition.x));
-        float y = Mathf.Abs(mousePosition.y - (gridManager.tileSize * gridPosition.y));
+        // Calcola l'offset del mouse all'interno del tile
+        float offsetX = (gridManager.tileSize / 2 + mousePosition.x) % gridManager.tileSize / gridManager.tileSize;
+        float offsetY = (gridManager.tileSize / 2 + mousePosition.y) % gridManager.tileSize / gridManager.tileSize;
 
-        //Debug.Log(new Vector2(x, y));
-        Debug.Log(new Vector2(mousePosition.x, mousePosition.y));
-        
-        if (x >= gridManager.tileSize / 2 && y >= gridManager.tileSize / 2)
-        {
-            gridPosition.y++;
-        }
-        if (x < gridManager.tileSize / 2 && y >= gridManager.tileSize / 2)
-        {
-            gridPosition.y++;
-            gridPosition.x--;
-        }
-        if (x < gridManager.tileSize / 2 && y < gridManager.tileSize / 2)
-        {
-            gridPosition.x--;
+        // Determina il quadrante cliccato
+        if (offsetX >= gridManager.tileSize / 2 && offsetY >= gridManager.tileSize / 2) {
+            // Quadrante in alto a destra
+            gridPosition += new Vector2(0, 1);
+        } else if (offsetX < gridManager.tileSize / 2 && offsetY >= gridManager.tileSize / 2) {
+            // Quadrante in alto a sinistra
+            gridPosition += new Vector2(-1, 1);
+        } else if (offsetX < gridManager.tileSize / 2 && offsetY < gridManager.tileSize / 2) {
+            // Quadrante in basso a sinistra
+            gridPosition += new Vector2(-1, 0);
         }
         
         gridManager.PlaceTurret(gridPosition);
