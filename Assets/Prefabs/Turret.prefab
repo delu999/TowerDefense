@@ -98,10 +98,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf031fa1360c47c0ea1c065ac3e84434, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: 3
+  range: 20
   fireRate: 1
   damage: 1
-  bulletPrefab: {fileID: 2786664853594534308, guid: 8dd46d0b9def8cad1bd06751daaa96b6, type: 3}
+  bulletPrefab: {fileID: 6667073094910504863, guid: 8dd46d0b9def8cad1bd06751daaa96b6, type: 3}
+  enemyMask:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!61 &4010711281664444237
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -65,7 +65,7 @@ public class GridManager : MonoBehaviour
             spawnedEnemy.Init(_occupiedCells, this);
             _enemies.Add(spawnedEnemy);
 
-            yield return new WaitForSeconds(2f); // Wait for 2 seconds before spawning the next enemy
+            yield break;//return new WaitForSeconds(2f); // Wait for 2 seconds before spawning the next enemy
         }
     }
 

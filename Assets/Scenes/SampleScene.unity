@@ -310,6 +310,9 @@ MonoBehaviour:
   mainCamera: {fileID: 519420032}
   enemyPrefab: {fileID: 3172094324081992923, guid: ed386d334b00bcc3285138fd8919ad91, type: 3}
   turretPrefab: {fileID: 6772062096461808707, guid: d2faae2c837703a63b7c67ed4a73795b, type: 3}
+  colliderMask:
+    serializedVersion: 2
+    m_Bits: 192
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
