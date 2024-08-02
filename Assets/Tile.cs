@@ -17,16 +17,4 @@ public class Tile : MonoBehaviour
     public void Init(bool isOffset) {
         spriteRenderer.color = isOffset ? offsetColor : baseColor;
     }
-
-    void OnMouseEnter() {
-        highlight.SetActive(true);
-        // Se la cella è parte di una torretta, evidenzia le 4 celle
-        if (highlight.transform.localScale == Vector3.one * 2) {
-            highlight.transform.localScale = Vector3.one;
-        }
-    }
-
-    void OnMouseExit() {
-        highlight.SetActive(false);
-    }
 }
