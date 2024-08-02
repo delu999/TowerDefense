@@ -7,9 +7,12 @@ public class Turret : MonoBehaviour
 {
     [SerializeField] private float range = 3f;
     [SerializeField] private float fireRate = 1f;
+    [SerializeField] private float rotationSpeed = 400f;
     [SerializeField] private int damage = 1;
     [SerializeField] private Bullet bulletPrefab;
     [SerializeField] private LayerMask enemyMask;
+    [SerializeField] private Transform firingPoint;
+    [SerializeField] private Transform turretRotationPoint;
 
     private float _fireCountdown;
     private Enemy _targetEnemy;
@@ -21,7 +24,7 @@ public class Turret : MonoBehaviour
 
     private void Update() {
         try {
-            if (_targetEnemy is null || Vector2.Distance(transform.position, _targetEnemy.transform.position) > range) {
+            if (_targetEnemy is null || Vector2.Distance(transform.position, _targetEnemy.transform.position) > GetRange()) {
                 FindTarget();
             }
         }
@@ -32,6 +35,7 @@ public class Turret : MonoBehaviour
 
         if (_targetEnemy is null) return;
 
+        RotateTowardsTarget();
         
         if (_targetEnemy is not null && _fireCountdown <= 0f) {
             Shoot();
@@ -40,10 +44,10 @@ public class Turret : MonoBehaviour
 
         _fireCountdown -= Time.deltaTime;
     }
-
+    
     private void FindTarget() {
         Collider2D[] colliders = new Collider2D[30];
-        int size = Physics2D.OverlapCircleNonAlloc(transform.position, range, colliders, enemyMask);
+        int size = Physics2D.OverlapCircleNonAlloc(transform.position, GetRange(), colliders, enemyMask);
         if (size == 0)
         {
             _targetEnemy = null;
@@ -53,7 +57,14 @@ public class Turret : MonoBehaviour
         _targetEnemy = colliders[0].GetComponent<Enemy>();
     }
 
+    private void RotateTowardsTarget()
+    {
+        if (_targetEnemy is null) return;
+        float angle = Mathf.Atan2(_targetEnemy.transform.position.y - transform.position.y, _targetEnemy.transform.position.x - transform.position.x) * Mathf.Rad2Deg - 90f;
 
+        Quaternion targetRotation = Quaternion.Euler(new Vector3(0f, 0f, angle));
+        turretRotationPoint.rotation = Quaternion.RotateTowards(turretRotationPoint.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+    }
 
     private void Shoot()
     {
@@ -66,17 +77,12 @@ public class Turret : MonoBehaviour
             return;
         }
 
-        Bullet bulletObj = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
-        bulletObj.Init( transform, _targetEnemy.transform, range);
+        Bullet bulletObj = Instantiate(bulletPrefab, firingPoint.position, Quaternion.identity);
+        bulletObj.Init( firingPoint, _targetEnemy.transform, GetRange());
     }
 
     private float GetRange()
     {
-        return 0f; //range * _tileSize;
-    }
-
-    private void OnDrawGizmosSelected() {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, range);
+        return range; //range * _tileSize;
     }
 }
