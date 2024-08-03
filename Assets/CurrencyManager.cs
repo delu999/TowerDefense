@@ -11,7 +11,7 @@ public class CurrencyManager : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance == null)
+        if (Instance is null)
         {
             Balance = statingCurrency;
             Instance = this;
