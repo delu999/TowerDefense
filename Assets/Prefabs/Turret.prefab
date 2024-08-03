@@ -177,7 +177,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 653856609257066120}
@@ -247,9 +247,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf031fa1360c47c0ea1c065ac3e84434, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: 20
+  range: 3
   fireRate: 1
-  rotationSpeed: 200
+  rotationSpeed: 400
   damage: 1
   bulletPrefab: {fileID: 6667073094910504863, guid: 8dd46d0b9def8cad1bd06751daaa96b6, type: 3}
   enemyMask:

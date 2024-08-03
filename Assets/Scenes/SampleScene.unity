@@ -313,6 +313,9 @@ MonoBehaviour:
   colliderMask:
     serializedVersion: 2
     m_Bits: 192
+  previewColorCanPlace: {r: 0, g: 1, b: 0, a: 0.5}
+  previewColorCannotPlace: {r: 1, g: 0, b: 0, a: 0.5}
+  turretPreviewPrefab: {fileID: 1524516003829438954, guid: 792295eb0b77544eda2832078b5f8f27, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
