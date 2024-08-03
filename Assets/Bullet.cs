@@ -7,11 +7,11 @@ public class Bullet : MonoBehaviour
 {
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private float bulletSpeed = 10f;
-    [SerializeField] private int bulletDamage = 1;
     
     private Transform _origin;
     private Transform _target;
     private float _range;
+    private int _damage;
 
     private void Update()
     {
@@ -21,10 +21,11 @@ public class Bullet : MonoBehaviour
         }
     }
 
-    public void Init(Transform origin, Transform target, float range) {
+    public void Init(Transform origin, Transform target, float range, int damage) {
         _target = target;
         _range = range;
         _origin = origin;
+        _damage = damage;
     }
 
     private void FixedUpdate() {
@@ -43,7 +44,7 @@ public class Bullet : MonoBehaviour
     
         Enemy enemy = other.GetComponent<Enemy>();
         if (enemy != null) {
-            enemy.TakeDamage(bulletDamage);
+            enemy.TakeDamage(_damage);
             Destroy(gameObject);
         }
     }

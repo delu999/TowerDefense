@@ -269,6 +269,7 @@ GameObject:
   m_Component:
   - component: {fileID: 964998656}
   - component: {fileID: 964998657}
+  - component: {fileID: 964998658}
   m_Layer: 0
   m_Name: GridManager
   m_TagString: Untagged
@@ -317,6 +318,19 @@ MonoBehaviour:
   previewColorCanPlace: {r: 0, g: 1, b: 0, a: 0.5}
   previewColorCannotPlace: {r: 1, g: 0, b: 0, a: 0.5}
   turretPreviewPrefab: {fileID: 1524516003829438954, guid: 792295eb0b77544eda2832078b5f8f27, type: 3}
+--- !u!114 &964998658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 964998655}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee9f44856dc7f407f9af3af9ae35c528, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  statingCurrency: 100
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

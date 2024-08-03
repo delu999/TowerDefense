@@ -94,6 +94,12 @@ public class GridManager : MonoBehaviour
         }
 
         if (IsPathAvailable()) {
+            if (CurrencyManager.Instance is null || !CurrencyManager.Instance.SpendCurrency(turretPrefab.GetComponent<Turret>().cost))
+            {
+                Debug.Log("Not enough currency to place the turret!");
+                return;
+            }
+            
             Vector3 turretPosition = gridPosition * tileSize + new Vector2(tileSize / 2, -1 * tileSize / 2);
             Instantiate(turretPrefab, turretPosition, Quaternion.identity);
             RecalculatePathsForAllEnemies();

@@ -7,6 +7,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private float moveSpeed = 2f;
     [SerializeField] private int maxHealth = 3;
+    [SerializeField] private int rewardAmount = 10;
     
     private GridManager _gridManager;
     private Pathfinding _pathfinding;
@@ -40,6 +41,14 @@ public class Enemy : MonoBehaviour
 
         _gridManager.RemoveEnemy(this);
         Destroy(gameObject);
+    }
+    
+    private void OnDestroy()
+    {
+        if (CurrencyManager.Instance != null)
+        {
+            CurrencyManager.Instance.AddCurrency(rewardAmount);
+        }
     }
 
     private void FixedUpdate() {

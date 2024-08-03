@@ -9,6 +9,7 @@ public class Turret : MonoBehaviour
     [SerializeField] private float fireRate = 1f;
     [SerializeField] private float rotationSpeed = 400f;
     [SerializeField] private int damage = 1;
+    [SerializeField] public int cost = 50;
     [SerializeField] private Bullet bulletPrefab;
     [SerializeField] private LayerMask enemyMask;
     [SerializeField] private Transform firingPoint;
@@ -78,7 +79,7 @@ public class Turret : MonoBehaviour
         }
 
         Bullet bulletObj = Instantiate(bulletPrefab, firingPoint.position, Quaternion.identity);
-        bulletObj.Init( firingPoint, _targetEnemy.transform, GetRange());
+        bulletObj.Init( firingPoint, _targetEnemy.transform, GetRange(), damage);
     }
 
     private float GetRange()
