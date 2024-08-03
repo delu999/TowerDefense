@@ -48,6 +48,7 @@ public class Enemy : MonoBehaviour
         if (_path is null || _pathIndex >= _path.Count) return;
         
         var direction = (_path[_pathIndex] - (Vector2)transform.position).normalized;
+        RotateTowardsTarget();
         rb.velocity = direction * moveSpeed;
     }
 
@@ -79,5 +80,14 @@ public class Enemy : MonoBehaviour
         
         _gridManager.RemoveEnemy(this);
         Destroy(gameObject);
+    }
+    
+    private void RotateTowardsTarget()
+    {
+        if (_path is null) return;
+        float angle = Mathf.Atan2(_path[_pathIndex].y - transform.position.y, _path[_pathIndex].x - transform.position.x) * Mathf.Rad2Deg - 90f;
+        
+        Quaternion targetRotation = Quaternion.Euler(new Vector3(0f, 0f, angle));
+        transform.rotation = targetRotation;
     }
 }

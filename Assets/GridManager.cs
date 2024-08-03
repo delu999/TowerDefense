@@ -12,6 +12,7 @@ public class GridManager : MonoBehaviour
     [SerializeField] public int numVerticalTiles;  // TODO make it private?
     [SerializeField] public float tileSize = 0.5f; // TODO make it private?
     [SerializeField] private Tile tilePrefab;
+    [SerializeField] private GameObject placingBlockerPrefab;
     [SerializeField] private Transform mainCamera;
     [SerializeField] private Enemy enemyPrefab;
     [SerializeField] private GameObject turretPrefab;
@@ -30,6 +31,7 @@ public class GridManager : MonoBehaviour
     void Start()
     {
         tilePrefab.transform.localScale = new Vector3(tileSize, tileSize, tileSize);
+        placingBlockerPrefab.transform.localScale = new Vector3(tileSize, tileSize, tileSize);
         turretPrefab.transform.localScale = new Vector3(tileSize*2, tileSize*2, tileSize);
         turretPreviewPrefab.transform.localScale = turretPrefab.transform.localScale;
         _pathfinding = new Pathfinding(numHorizontalTiles, numVerticalTiles, tileSize);
@@ -52,6 +54,8 @@ public class GridManager : MonoBehaviour
                 spawnedTile.Init(isOffset);
 
                 _tiles[new Vector2(x, y)] = spawnedTile;
+                
+                if (x == 0 || x == numHorizontalTiles -1) Instantiate(placingBlockerPrefab, new Vector3(xPos, yPos, 0), Quaternion.identity);
             }
         }
     }

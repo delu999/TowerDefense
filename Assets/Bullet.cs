@@ -31,10 +31,12 @@ public class Bullet : MonoBehaviour
         if (!_target) return;
 
         Vector2 direction = (_target.position - transform.position).normalized;
-
+        
+        RotateTowardsTarget();
+        
         rb.velocity = direction * bulletSpeed;
     }
-
+    
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (!other.CompareTag("Enemy")) return;
@@ -44,5 +46,14 @@ public class Bullet : MonoBehaviour
             enemy.TakeDamage(bulletDamage);
             Destroy(gameObject);
         }
+    }
+    
+    private void RotateTowardsTarget()
+    {
+        if (_target is null) return;
+        float angle = Mathf.Atan2(_target.position.y - transform.position.y, _target.position.x - transform.position.x) * Mathf.Rad2Deg - 90f;
+
+        Quaternion targetRotation = Quaternion.Euler(new Vector3(0f, 0f, angle));
+        transform.rotation = targetRotation;
     }
 }
