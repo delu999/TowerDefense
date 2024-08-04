@@ -23,8 +23,8 @@ public class GridManager : MonoBehaviour
     private readonly List<Enemy> _enemies = new();
     private Pathfinding _pathfinding;
     
-    [SerializeField] private Color previewColorCanPlace = new Color(0, 1, 0, 0.5f); // Verde semitrasparente
-    [SerializeField] private Color previewColorCannotPlace = new Color(1, 0, 0, 0.5f); // Rosso semitrasparente
+    [SerializeField] private Color previewColorCanPlace = new(0, 1, 0, 0.5f); // Verde semitrasparente
+    [SerializeField] private Color previewColorCannotPlace = new(1, 0, 0, 0.5f); // Rosso semitrasparente
     [SerializeField] private GameObject turretPreviewPrefab;
     private GameObject _currentTurretPreview;
     
@@ -177,7 +177,7 @@ public class GridManager : MonoBehaviour
         }
     }
 
-    public void RemoveEnemy(Enemy enemy) {
+    public void RemoveEnemy(Enemy enemy, bool arrivedToBase = false) {
         if (_enemies.Contains(enemy)) {
             _enemies.Remove(enemy);
         }

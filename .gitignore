@@ -9,8 +9,9 @@
 /[Bb]uilds/
 /[Ll]ogs/
 /[Uu]ser[Ss]ettings/
-.DS_Store
-.idea/
+*.DS_Store*
+.idea
+.vscode
 
 # MemoryCaptures can get excessive in size.
 # They also could contain extremely sensitive data
@@ -26,7 +27,7 @@
 /[Aa]ssets/Plugins/Editor/JetBrains*
 
 # Visual Studio cache directory
-.vs/
+.vs
 
 # Gradle cache directory
 .gradle/

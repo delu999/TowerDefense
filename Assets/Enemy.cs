@@ -8,6 +8,8 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float moveSpeed = 2f;
     [SerializeField] private int maxHealth = 3;
     [SerializeField] private int rewardAmount = 10;
+    [SerializeField] public int damageToBase = 1;
+    private BaseLife baseLife;
     
     private GridManager _gridManager;
     private Pathfinding _pathfinding;
@@ -39,6 +41,8 @@ public class Enemy : MonoBehaviour
         
         if (_pathIndex < _path.Count) return;
 
+        // The enemy has reached his target
+        BaseLife.main.DecreaseLife(damageToBase);
         _gridManager.RemoveEnemy(this);
         Destroy(gameObject);
     }
