@@ -1,51 +1,50 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class Pathfinding
 {
-    private readonly int _width;
-    private readonly int _height;
-    private readonly float _tileSize;
+    private readonly LayerMask _colliderMasks;
+    private readonly Tilemap _tilemap; // Aggiungi la tilemap
 
-    public Pathfinding(int width, int height, float tileSize)
+    public Pathfinding(LayerMask colliderMasks, Tilemap tilemap)
     {
-        _width = width;
-        _height = height;
-        _tileSize = tileSize;
+        _colliderMasks = colliderMasks;
+        _tilemap = tilemap;
     }
 
-    public List<Vector2> FindPath(Vector2 start, Vector2 goal, HashSet<Vector2> occupiedCells)
+    public List<Vector2> FindPath(Vector2 start, Vector2 goal)
     {
-        start = GetGridPosition(start);
-        goal = GetGridPosition(goal);
-        
-        PriorityQueue<Vector2> openSet = new();
-        openSet.Enqueue(start, 0);
+        var startCell = _tilemap.WorldToCell(start);
+        var goalCell = _tilemap.WorldToCell(goal);
 
-        Dictionary<Vector2, Vector2> cameFrom = new();
-        Dictionary<Vector2, float> gScore = new() { [start] = 0 };
-        Dictionary<Vector2, float> fScore = new() { [start] = Heuristic(start, goal) };
+        PriorityQueue<Vector3Int> openSet = new();
+        openSet.Enqueue(startCell, 0);
+
+        Dictionary<Vector3Int, Vector3Int> cameFrom = new();
+        Dictionary<Vector3Int, float> gScore = new() { [startCell] = 0 };
+        Dictionary<Vector3Int, float> fScore = new() { [startCell] = Heuristic(startCell, goalCell) };
 
         while (openSet.Count > 0)
         {
             var current = openSet.Dequeue();
 
-            if (current == goal)
+            if (current == goalCell)
             {
                 return ReconstructPath(cameFrom, current);
             }
 
             foreach (var neighbor in GetNeighbors(current))
             {
-                if (occupiedCells.Contains(neighbor)) continue;
+                if (IsCellOccupied(neighbor)) continue;
 
-                var tentativeGScore = gScore[current] + Vector2.Distance(current, neighbor);
+                var tentativeGScore = gScore[current] + Vector3Int.Distance(current, neighbor);
 
                 if (gScore.ContainsKey(neighbor) && !(tentativeGScore < gScore[neighbor])) continue;
-                
+
                 cameFrom[neighbor] = current;
                 gScore[neighbor] = tentativeGScore;
-                fScore[neighbor] = gScore[neighbor] + Heuristic(neighbor, goal);
+                fScore[neighbor] = gScore[neighbor] + Heuristic(neighbor, goalCell);
                 openSet.Enqueue(neighbor, fScore[neighbor]);
             }
         }
@@ -53,54 +52,47 @@ public class Pathfinding
         return null; // No path found
     }
 
-    private List<Vector2> ReconstructPath(Dictionary<Vector2, Vector2> cameFrom, Vector2 current)
+    private List<Vector2> ReconstructPath(Dictionary<Vector3Int, Vector3Int> cameFrom, Vector3Int current)
     {
-        var path = new List<Vector2> { GetTransformPosition(current) };
+        var path = new List<Vector2> { _tilemap.GetCellCenterWorld(current) };
 
         while (cameFrom.ContainsKey(current))
         {
             current = cameFrom[current];
-            path.Add(GetTransformPosition(current));
+            path.Add(_tilemap.GetCellCenterWorld(current));
         }
-        
+
         path.Reverse();
         return path;
     }
 
-    private float Heuristic(Vector2 a, Vector2 b)
+    private float Heuristic(Vector3Int a, Vector3Int b)
     {
-        // Use Manhattan distance as the heuristic
         return Mathf.Abs(a.x - b.x) + Mathf.Abs(a.y - b.y);
     }
 
-    private IEnumerable<Vector2> GetNeighbors(Vector2 current)
+    private IEnumerable<Vector3Int> GetNeighbors(Vector3Int current)
     {
-        Vector2[] directions = {
-            new(1, 0), // right
-            new(-1, 0), // left
-            new(0, 1), // up
-            new(0, -1) // down
+        Vector3Int[] directions = {
+            new(1, 0, 0), // right
+            new(-1, 0, 0), // left
+            new(0, 1, 0), // up
+            new(0, -1, 0) // down
         };
+        
+
 
         foreach (var direction in directions)
         {
             var neighbor = current + direction;
-            if (neighbor.x >= 0 && neighbor.x < _width && neighbor.y >= 0 && neighbor.y < _height)
-            {
-                yield return neighbor;
-            }
+            yield return neighbor;
         }
     }
-    
-    private Vector2 GetGridPosition(Vector2 t)
+
+    private bool IsCellOccupied(Vector3Int cellPosition)
     {
-        return new Vector2(
-            Mathf.Round(t.x / _tileSize), 
-            Mathf.Round(t.y / _tileSize));
-    }
-    
-    private Vector2 GetTransformPosition(Vector2 t)
-    {
-        return t * _tileSize;
+        Vector3 worldPosition = _tilemap.GetCellCenterWorld(cellPosition);
+        if (!_tilemap.HasTile(cellPosition)) return false;
+        return Physics2D.OverlapCircle(worldPosition, 0.25f, _colliderMasks) != null;
     }
 }

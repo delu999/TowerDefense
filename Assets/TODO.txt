@@ -1,0 +1,13 @@
+- Rename GridManager to GameManager or LevelManager
+
+- Add sorting layers. At the moment enemy goes under the turret
+
+- Add enemy animation
+
+- Add turret animation
+
+- canvas = UI, turretshop = panel, img with event listener (risolvere problema stretch delle immagini)
+
+- i nemici escono fuori
+
+- Solve is path available in EnemySpawner
