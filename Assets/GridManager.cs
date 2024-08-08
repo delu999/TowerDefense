@@ -1,195 +1,194 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Events;
-using Random = UnityEngine.Random;
+using UnityEngine.Tilemaps;
 
 public class GridManager : MonoBehaviour
 {
-    [SerializeField] public int numHorizontalTiles; // TODO make it private?
-    [SerializeField] public int numVerticalTiles;  // TODO make it private?
-    [SerializeField] public float tileSize = 0.5f; // TODO make it private?
-    [SerializeField] private Tile tilePrefab;
-    [SerializeField] private GameObject placingBlockerPrefab;
-    [SerializeField] private Transform mainCamera;
-    [SerializeField] private Enemy enemyPrefab;
-    [SerializeField] private GameObject turretPrefab;
-    [SerializeField] private LayerMask colliderMask;
+    // [SerializeField] public int numHorizontalTiles;
+    // [SerializeField] public int numVerticalTiles;
+    // [SerializeField] public float tileSize = 0.5f;
+    // [SerializeField] private Tile tilePrefab;
+    // [SerializeField] private GameObject placingBlockerPrefab;
+    // [SerializeField] private Transform mainCamera;
+    // [SerializeField] private Enemy enemyPrefab;
+    // [SerializeField] private GameObject turretPrefab;
+    // [SerializeField] private LayerMask colliderMask;
+    // [SerializeField] private Tilemap spawnTilemap;
+    // [SerializeField] private Tilemap baseTilemap;
+    //
+    // private readonly Dictionary<Vector2, Tile> _tiles = new();
+    // private readonly HashSet<Vector2> _occupiedCells = new();
+    // private readonly List<Enemy> _enemies = new();
+    // private Pathfinding _pathfinding;
+    //
+    // [SerializeField] private Color previewColorCanPlace = new (0, 1, 0, 0.25f); // Verde semitrasparente
+    // [SerializeField] private Color previewColorCannotPlace = new (1, 0, 0, 0.25f); // Rosso semitrasparente
+    // [SerializeField] private GameObject turretPreviewPrefab;
+    // [SerializeField] private GameObject turretRangePreviewPrefab;
+    // private GameObject _currentTurretPreview;
+    // private GameObject _currentTurretRangePreview;
+    //
+    // public List<Vector3> spawnPositions = new List<Vector3>();
+    // public List<Vector3> basePositions = new List<Vector3>();
     
-    private readonly Dictionary<Vector2, Tile> _tiles = new();
-    private readonly HashSet<Vector2> _occupiedCells = new();
-    private readonly List<Enemy> _enemies = new();
-    private Pathfinding _pathfinding;
-    
-    [SerializeField] private Color previewColorCanPlace = new(0, 1, 0, 0.25f); // Verde semitrasparente
-    [SerializeField] private Color previewColorCannotPlace = new(1, 0, 0, 0.25f); // Rosso semitrasparente
-    [SerializeField] private GameObject turretPreviewPrefab;
-    [SerializeField] private GameObject turretRangePreviewPrefab;
-    private GameObject _currentTurretPreview;
-    private GameObject _currentTurretRangePreview;
-    
-    void Start()
+    private void Start()
     {
-        tilePrefab.transform.localScale = new Vector3(tileSize, tileSize, tileSize);
-        placingBlockerPrefab.transform.localScale = new Vector3(tileSize, tileSize, tileSize);
-        turretPrefab.transform.localScale = new Vector3(tileSize*2, tileSize*2, tileSize);
-        turretPreviewPrefab.transform.localScale = turretPrefab.transform.localScale;
-        _pathfinding = new Pathfinding(numHorizontalTiles, numVerticalTiles, tileSize);
-        GenerateGrid();
-        CenterCamera();
-        StartCoroutine(SpawnEnemies());
+        EnemySpawner.Instance.StartSpawning();
     }
 
-    private void GenerateGrid() {
-        for (var x = 0; x < numHorizontalTiles; x++) {
-            for (var y = 0; y < numVerticalTiles; y++) {
-                var xPos = x * tileSize;
-                var yPos = y * tileSize;
-
-                var spawnedTile = Instantiate(tilePrefab, new Vector3(xPos, yPos, 0), Quaternion.identity);
-                spawnedTile.name = $"Tile {x} {y}";
-                spawnedTile.SetGridPosition(new Vector2(x, y));
-
-                var isOffset = (x + y) % 2 == 1;
-                spawnedTile.Init(isOffset);
-
-                _tiles[new Vector2(x, y)] = spawnedTile;
-                
-                if (x == 0 || x == numHorizontalTiles -1) Instantiate(placingBlockerPrefab, new Vector3(xPos, yPos, 0), Quaternion.identity);
-            }
-        }
-    }
-
-    private void CenterCamera() {
-        var centerX = (numHorizontalTiles * tileSize) / 2 - (tileSize / 2);
-        var centerY = (numVerticalTiles * tileSize) / 2 - (tileSize / 2);
-        mainCamera.position = new Vector3(centerX, centerY, -10);
-    }
-
-    private IEnumerator SpawnEnemies() {
-        while (true) {
-            var randomSpawnRow = Random.Range(0, numVerticalTiles - 1);
-            var spawnPosition = new Vector2(0, randomSpawnRow * tileSize);
-            var spawnedEnemy = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
-            spawnedEnemy.Init(_occupiedCells, this);
-            _enemies.Add(spawnedEnemy);
-
-            yield return new WaitForSeconds(2f); // Wait for 2 seconds before spawning the next enemy
-        }
-    }
-
-    public void PlaceTurret(Vector2 gridPosition)
-    {
-        if (!CanPlaceTurret(gridPosition)) return;
-        
-        Vector2[] turretCells = {
-            gridPosition,
-            gridPosition + new Vector2(1, 0),
-            gridPosition + new Vector2(0, -1),
-            gridPosition + new Vector2(1, -1)
-        };
-
-        foreach (var pos in turretCells) {
-            _occupiedCells.Add(pos);
-        }
-
-        if (IsPathAvailable()) {
-            if (CurrencyManager.Instance is null || !CurrencyManager.Instance.SpendCurrency(turretPrefab.GetComponent<Turret>().cost))
-            {
-                Debug.Log("Not enough currency to place the turret!");
-                return;
-            }
-            
-            Vector3 turretPosition = gridPosition * tileSize + new Vector2(tileSize / 2, -1 * tileSize / 2);
-            Instantiate(turretPrefab, turretPosition, Quaternion.identity);
-            RecalculatePathsForAllEnemies();
-        } else {
-            foreach (var pos in turretCells) {
-                _occupiedCells.Remove(pos);
-            }
-            Debug.Log("Cannot place turret, no valid path for enemies.");
-        }
-    }
-
-    public void PreviewTurret(Vector2 gridPosition)
-    {
-        if (_currentTurretPreview is null)
-        {
-            _currentTurretPreview = Instantiate(turretPreviewPrefab, Vector3.zero, Quaternion.identity);
-            _currentTurretRangePreview = Instantiate(turretRangePreviewPrefab, Vector3.zero, Quaternion.identity);
-        }
-
-        bool canPlace = CanPlaceTurret(gridPosition);
-        _currentTurretPreview.transform.position = gridPosition * tileSize + new Vector2(tileSize / 2, - tileSize / 2);
-        _currentTurretRangePreview.transform.position = _currentTurretPreview.transform.position;
-        _currentTurretRangePreview.transform.localScale = new Vector3(turretPrefab.GetComponent<Turret>().range, turretPrefab.GetComponent<Turret>().range, 1f);
-        _currentTurretPreview.SetActive(true);
-        _currentTurretRangePreview.SetActive(true);
-    
-        // Cambia il colore del `SpriteRenderer` in base alla possibilità di posizionamento
-        var spriteRenderer = _currentTurretPreview.GetComponent<SpriteRenderer>();
-        spriteRenderer.color = canPlace ? previewColorCanPlace : previewColorCannotPlace;
-        spriteRenderer = _currentTurretRangePreview.GetComponent<SpriteRenderer>();
-        spriteRenderer.color = canPlace ? previewColorCanPlace : previewColorCannotPlace;
-    }
-
-    public void HideTurretPreview()
-    {
-        if (_currentTurretPreview is not null)
-        {
-            _currentTurretPreview.SetActive(false);
-            _currentTurretPreview = null;
-            _currentTurretRangePreview.SetActive(false);
-            _currentTurretRangePreview = null;
-        }
-    }
-
-    private bool CanPlaceTurret(Vector2 gridPosition) {
-        Vector2[] turretCells = {
-            gridPosition,
-            gridPosition + new Vector2(1, 0),
-            gridPosition + new Vector2(0, -1),
-            gridPosition + new Vector2(1, -1)
-        };
-        
-        foreach (var pos in turretCells) {
-            if (!_tiles.ContainsKey(pos)) {
-                Debug.Log("Tile not found: " + pos);
-                return false;
-            }
-
-            if (IsOccupied(pos)) {
-                Debug.Log("Position occupied: " + pos);
-                return false;
-            }
-        }
-        return true;
-    }
-
-    private bool IsOccupied(Vector2 position)
-    {
-        position *= tileSize;
-        return Physics2D.OverlapCircle(position, tileSize / 2, colliderMask) is not null;
-    }
-
-    private bool IsPathAvailable() {
-        var startPosition = new Vector2(0, 0);
-        var goalPosition = new Vector2((numHorizontalTiles - 1) * tileSize, 0);
-
-        return _pathfinding.FindPath(startPosition, goalPosition, _occupiedCells) != null;
-    }
-
-    private void RecalculatePathsForAllEnemies() {
-        foreach (var enemy in _enemies) {
-            enemy.RecalculatePath(_occupiedCells);
-        }
-    }
-
-    public void RemoveEnemy(Enemy enemy, bool arrivedToBase = false) {
-        if (_enemies.Contains(enemy)) {
-            _enemies.Remove(enemy);
-        }
-    }
+    // void Start()
+    // {
+    //     tilePrefab.transform.localScale = new Vector3(tileSize, tileSize, tileSize);
+    //     placingBlockerPrefab.transform.localScale = new Vector3(tileSize, tileSize, tileSize);
+    //     turretPrefab.transform.localScale = new Vector3(tileSize*2, tileSize*2, tileSize);
+    //     turretPreviewPrefab.transform.localScale = turretPrefab.transform.localScale;
+    //     _pathfinding = new Pathfinding(numHorizontalTiles, numVerticalTiles, tileSize);
+    //     GetTilePositions(spawnTilemap, spawnPositions);
+    //     GetTilePositions(baseTilemap, basePositions);
+    //     StartCoroutine(SpawnEnemies());
+    // }
+    //
+    // private void GetTilePositions(Tilemap tilemap, List<Vector3> positions)
+    // {
+    //     foreach (var pos in tilemap.cellBounds.allPositionsWithin)
+    //     {
+    //         var localPlace = new Vector3Int(pos.x, pos.y, pos.z);
+    //         if (!tilemap.HasTile(localPlace)) continue;
+    //         var worldPos = tilemap.CellToWorld(localPlace);
+    //         positions.Add(worldPos);
+    //     }
+    // }
+    //
+    // private IEnumerator SpawnEnemies() {
+    //     while (true) {
+    //         // Choose a random spawn position from the spawn tilemap
+    //         var spawnPosition = spawnPositions[UnityEngine.Random.Range(0, spawnPositions.Count)];
+    //         var spawnedEnemy = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
+    //         spawnedEnemy.Init(_occupiedCells, this);
+    //         _enemies.Add(spawnedEnemy);
+    //
+    //         yield return new WaitForSeconds(2f); // Wait for 2 seconds before spawning the next enemy
+    //     }
+    // }
+    //
+    // public void PlaceTurret(Vector2 gridPosition)
+    // {
+    //     if (!CanPlaceTurret(gridPosition)) return;
+    //     
+    //     Vector2[] turretCells = {
+    //         gridPosition,
+    //         gridPosition + new Vector2(1, 0),
+    //         gridPosition + new Vector2(0, -1),
+    //         gridPosition + new Vector2(1, -1)
+    //     };
+    //
+    //     foreach (var pos in turretCells) {
+    //         _occupiedCells.Add(pos);
+    //     }
+    //
+    //     if (IsPathAvailable()) {
+    //         if (CurrencyManager.Instance is null || !CurrencyManager.Instance.SpendCurrency(turretPrefab.GetComponent<Turret>().cost))
+    //         {
+    //             Debug.Log("Not enough currency to place the turret!");
+    //             return;
+    //         }
+    //         
+    //         Vector3 turretPosition = gridPosition * tileSize + new Vector2(tileSize / 2, -1 * tileSize / 2);
+    //         Instantiate(turretPrefab, turretPosition, Quaternion.identity);
+    //         RecalculatePathsForAllEnemies();
+    //     } else {
+    //         foreach (var pos in turretCells) {
+    //             _occupiedCells.Remove(pos);
+    //         }
+    //         Debug.Log("Cannot place turret, no valid path for enemies.");
+    //     }
+    // }
+    //
+    // public void PreviewTurret(Vector2 gridPosition)
+    // {
+    //     if (_currentTurretPreview is null)
+    //     {
+    //         _currentTurretPreview = Instantiate(turretPreviewPrefab, Vector3.zero, Quaternion.identity);
+    //         _currentTurretRangePreview = Instantiate(turretRangePreviewPrefab, Vector3.zero, Quaternion.identity);
+    //     }
+    //
+    //     bool canPlace = CanPlaceTurret(gridPosition);
+    //     _currentTurretPreview.transform.position = gridPosition * tileSize + new Vector2(tileSize / 2, - tileSize / 2);
+    //     _currentTurretRangePreview.transform.position = _currentTurretPreview.transform.position;
+    //     _currentTurretRangePreview.transform.localScale = new Vector3(turretPrefab.GetComponent<Turret>().range, turretPrefab.GetComponent<Turret>().range, 1f);
+    //     _currentTurretPreview.SetActive(true);
+    //     _currentTurretRangePreview.SetActive(true);
+    //
+    //     // Cambia il colore del `SpriteRenderer` in base alla possibilità di posizionamento
+    //     var spriteRenderer = _currentTurretPreview.GetComponent<SpriteRenderer>();
+    //     spriteRenderer.color = canPlace ? previewColorCanPlace : previewColorCannotPlace;
+    //     spriteRenderer = _currentTurretRangePreview.GetComponent<SpriteRenderer>();
+    //     spriteRenderer.color = canPlace ? previewColorCanPlace : previewColorCannotPlace;
+    // }
+    //
+    // public void HideTurretPreview()
+    // {
+    //     if (_currentTurretPreview is not null)
+    //     {
+    //         _currentTurretPreview.SetActive(false);
+    //         _currentTurretPreview = null;
+    //         _currentTurretRangePreview.SetActive(false);
+    //         _currentTurretRangePreview = null;
+    //     }
+    // }
+    //
+    // private bool CanPlaceTurret(Vector2 gridPosition) {
+    //     Vector2[] turretCells = {
+    //         gridPosition,
+    //         gridPosition + new Vector2(1, 0),
+    //         gridPosition + new Vector2(0, -1),
+    //         gridPosition + new Vector2(1, -1)
+    //     };
+    //     
+    //     foreach (var pos in turretCells) {
+    //         if (!_tiles.ContainsKey(pos)) {
+    //             Debug.Log("Tile not found: " + pos);
+    //             return false;
+    //         }
+    //
+    //         if (IsOccupied(pos)) {
+    //             Debug.Log("Position occupied: " + pos);
+    //             return false;
+    //         }
+    //     }
+    //     return true;
+    // }
+    //
+    // private bool IsOccupied(Vector2 position)
+    // {
+    //     position *= tileSize;
+    //     return Physics2D.OverlapCircle(position, tileSize / 2, colliderMask) is not null;
+    // }
+    //
+    // private bool IsPathAvailable() {
+    //     // Modify this to use basePositions as goal positions
+    //     foreach (var goalPosition in basePositions)
+    //     {
+    //         var startPosition = spawnPositions[0];
+    //         if (_pathfinding.FindPath(startPosition, goalPosition, _occupiedCells) != null)
+    //         {
+    //             return true;
+    //         }
+    //     }
+    //     return false;
+    // }
+    //
+    // private void RecalculatePathsForAllEnemies() {
+    //     foreach (var enemy in _enemies) {
+    //         enemy.RecalculatePath(_occupiedCells);
+    //     }
+    // }
+    //
+    // public void RemoveEnemy(Enemy enemy, bool arrivedToBase = false) {
+    //     if (_enemies.Contains(enemy)) {
+    //         _enemies.Remove(enemy);
+    //     }
+    // }
 }

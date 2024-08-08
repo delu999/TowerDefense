@@ -29,8 +29,8 @@ Transform:
   m_GameObject: {fileID: 1655209499408274660}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.9989295, y: 3.1548, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2468190621928200764}
@@ -137,9 +137,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 5415405362984598979}
-  moveSpeed: 2
+  moveSpeed: 10
   maxHealth: 3
-  rewardAmount: 10
+  turretMask:
+    serializedVersion: 2
+    m_Bits: 64
+  damageToBase: 1
 --- !u!50 &5415405362984598979
 Rigidbody2D:
   serializedVersion: 4
