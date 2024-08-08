@@ -9,6 +9,8 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float moveSpeed = 2f;
     [SerializeField] private int maxHealth = 3;
     [SerializeField] private LayerMask turretMask;
+    [SerializeField] public int damageToBase = 1;
+    private BaseLife baseLife;
 
     private Pathfinding _pathfinding;
     private List<Vector2> _path;
@@ -40,6 +42,8 @@ public class Enemy : MonoBehaviour
 
             if (_pathIndex >= _path.Count)
             {
+                // The enemy has reached his target
+                BaseLife.main.DecreaseLife(damageToBase);
                 Destroy(gameObject);
             }
         }

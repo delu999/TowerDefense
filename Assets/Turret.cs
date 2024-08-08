@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Turret : MonoBehaviour
 {
-    [SerializeField] private float range = 3f;
+    [SerializeField] public float range = 3f;
     [SerializeField] private float fireRate = 1f;
     [SerializeField] private float rotationSpeed = 400f;
     [SerializeField] private int damage = 1;

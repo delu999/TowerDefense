@@ -23,10 +23,12 @@ public class GridManager : MonoBehaviour
     // private readonly List<Enemy> _enemies = new();
     // private Pathfinding _pathfinding;
     //
-    // [SerializeField] private Color previewColorCanPlace = new Color(0, 1, 0, 0.5f); // Verde semitrasparente
-    // [SerializeField] private Color previewColorCannotPlace = new Color(1, 0, 0, 0.5f); // Rosso semitrasparente
+    // [SerializeField] private Color previewColorCanPlace = new (0, 1, 0, 0.25f); // Verde semitrasparente
+    // [SerializeField] private Color previewColorCannotPlace = new (1, 0, 0, 0.25f); // Rosso semitrasparente
     // [SerializeField] private GameObject turretPreviewPrefab;
+    // [SerializeField] private GameObject turretRangePreviewPrefab;
     // private GameObject _currentTurretPreview;
+    // private GameObject _currentTurretRangePreview;
     //
     // public List<Vector3> spawnPositions = new List<Vector3>();
     // public List<Vector3> basePositions = new List<Vector3>();
@@ -109,14 +111,20 @@ public class GridManager : MonoBehaviour
     //     if (_currentTurretPreview is null)
     //     {
     //         _currentTurretPreview = Instantiate(turretPreviewPrefab, Vector3.zero, Quaternion.identity);
+    //         _currentTurretRangePreview = Instantiate(turretRangePreviewPrefab, Vector3.zero, Quaternion.identity);
     //     }
     //
     //     bool canPlace = CanPlaceTurret(gridPosition);
     //     _currentTurretPreview.transform.position = gridPosition * tileSize + new Vector2(tileSize / 2, - tileSize / 2);
+    //     _currentTurretRangePreview.transform.position = _currentTurretPreview.transform.position;
+    //     _currentTurretRangePreview.transform.localScale = new Vector3(turretPrefab.GetComponent<Turret>().range, turretPrefab.GetComponent<Turret>().range, 1f);
     //     _currentTurretPreview.SetActive(true);
+    //     _currentTurretRangePreview.SetActive(true);
     //
     //     // Cambia il colore del `SpriteRenderer` in base alla possibilità di posizionamento
     //     var spriteRenderer = _currentTurretPreview.GetComponent<SpriteRenderer>();
+    //     spriteRenderer.color = canPlace ? previewColorCanPlace : previewColorCannotPlace;
+    //     spriteRenderer = _currentTurretRangePreview.GetComponent<SpriteRenderer>();
     //     spriteRenderer.color = canPlace ? previewColorCanPlace : previewColorCannotPlace;
     // }
     //
@@ -126,6 +134,8 @@ public class GridManager : MonoBehaviour
     //     {
     //         _currentTurretPreview.SetActive(false);
     //         _currentTurretPreview = null;
+    //         _currentTurretRangePreview.SetActive(false);
+    //         _currentTurretRangePreview = null;
     //     }
     // }
     //
@@ -176,7 +186,7 @@ public class GridManager : MonoBehaviour
     //     }
     // }
     //
-    // public void RemoveEnemy(Enemy enemy) {
+    // public void RemoveEnemy(Enemy enemy, bool arrivedToBase = false) {
     //     if (_enemies.Contains(enemy)) {
     //         _enemies.Remove(enemy);
     //     }
