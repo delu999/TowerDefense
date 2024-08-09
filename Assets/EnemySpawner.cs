@@ -66,4 +66,9 @@ public class EnemySpawner : MonoBehaviour
     {
         return _pathfinding.FindPath(spawnPoints[0].position, basePoints[0].position) is not null;
     }
+    
+    public void RemoveEnemy(Enemy enemy)
+    {
+        _enemies.Remove(enemy);
+    }
 }

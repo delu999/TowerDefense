@@ -4,37 +4,37 @@ using UnityEngine;
 public class CurrencyManager : MonoBehaviour
 {
     [SerializeField] public int statingCurrency = 100;
-    
-    public static CurrencyManager Instance;
-
+    public static CurrencyManager Instance { get; private set; }
     public int Balance { get; private set; }
-
+    
     private void Awake()
     {
-        if (Instance is null)
+        if (Instance is not null && Instance != this)
         {
-            Balance = statingCurrency;
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
+            Destroy(this);
         }
         else
         {
-            Destroy(gameObject);
+            Balance = statingCurrency;
+            Instance = this;
         }
     }
 
     public void AddCurrency(int amount)
     {
-        Instance.Balance += amount;
+        Balance += amount;
     }
 
-    public bool SpendCurrency(int amount)
+    public bool CanSpendCurrency(int amount)
     {
-        if (Instance.Balance >= amount)
+        return Balance >= amount;
+    }
+    
+    public void SpendCurrency(int amount)
+    {
+        if (CanSpendCurrency(amount))
         {
-            Instance.Balance -= amount;
-            return true;
+            Balance -= amount;
         }
-        return false;
     }
 }

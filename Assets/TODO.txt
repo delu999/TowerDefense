@@ -1,13 +1,35 @@
+- far vedere moneta
+
+- far vedere vita corrente della base
+
+- finire ripristino game over 
+
+- aggiungere altri tipi di torretta
+
+- aggiungere altri tipi di nemici
+
+- aggiungere menu di avvio
+
+- aggiungere un bottone per far startare la wave (scegliere se inviare wave al click o al timer)
+
+- preview delle torrette, con range
+
+- far vedere la vita ai nemici
+
+- finire turretshop, facendo vedere nome, costo 
+
+- finire ui delle turret shop
+
+- bilanciare potenza torrette e vita dei nemici
+
+- aggiungere background sotto le tilemap
+
+CODICE:
+
 - Rename GridManager to GameManager or LevelManager
 
 - Add sorting layers. At the moment enemy goes under the turret
 
-- Add enemy animation
+- Refactoring generale
 
-- Add turret animation
 
-- canvas = UI, turretshop = panel, img with event listener (risolvere problema stretch delle immagini)
-
-- i nemici escono fuori
-
-- Solve is path available in EnemySpawner

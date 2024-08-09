@@ -51,11 +51,16 @@ public class Pathfinding
 
         return null; // No path found
     }
-
     private List<Vector2> ReconstructPath(Dictionary<Vector3Int, Vector3Int> cameFrom, Vector3Int current)
     {
+        while (cameFrom.ContainsKey(current))
+        {
+            if (current.x != cameFrom[current].x) break;
+            current = cameFrom[current];
+        }
+        
         var path = new List<Vector2> { _tilemap.GetCellCenterWorld(current) };
-
+        bool targetXReached = false;
         while (cameFrom.ContainsKey(current))
         {
             current = cameFrom[current];
@@ -63,6 +68,7 @@ public class Pathfinding
         }
 
         path.Reverse();
+        path.RemoveAt(0);
         return path;
     }
 

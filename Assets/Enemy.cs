@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +11,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private int maxHealth = 3;
     [SerializeField] private LayerMask turretMask;
     [SerializeField] public int damageToBase = 1;
+    [SerializeField] private int reward = 10;
     private BaseLife baseLife;
 
     private Pathfinding _pathfinding;
@@ -35,7 +37,7 @@ public class Enemy : MonoBehaviour
     private void Update()
     {
         if (_path == null || _pathIndex >= _path.Count) return;
-
+        
         if (Vector2.Distance(_path[_pathIndex], transform.position) <= 0.1f)
         {
             _pathIndex++;
@@ -60,6 +62,7 @@ public class Enemy : MonoBehaviour
         }
 
         var direction = (_path[_pathIndex] - (Vector2)transform.position).normalized;
+        RotateTowardsTarget();
         rb.velocity = direction * moveSpeed;
     }
 
@@ -83,6 +86,28 @@ public class Enemy : MonoBehaviour
     public void RecalculatePath()
     {
         if (_isRecalculatingPath) return;
-        StartCoroutine(CalculatePathCoroutine());
+            StartCoroutine(CalculatePathCoroutine());
+    }
+    
+    public void TakeDamage(int damage) {
+        _currentHealth -= damage;
+        if (_currentHealth > 0) return;
+        
+        CurrencyManager.Instance.AddCurrency(reward);
+        Destroy(gameObject);
+    }
+    
+    private void RotateTowardsTarget()
+    {
+        if (_path is null) return;
+        float angle = Mathf.Atan2(_path[_pathIndex].y - transform.position.y, _path[_pathIndex].x - transform.position.x) * Mathf.Rad2Deg - 90f;
+        
+        Quaternion targetRotation = Quaternion.Euler(new Vector3(0f, 0f, angle));
+        transform.rotation = targetRotation;
+    }
+
+    private void OnDestroy()
+    {
+        EnemySpawner.Instance.RemoveEnemy(this);
     }
 }

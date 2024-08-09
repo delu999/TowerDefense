@@ -33,23 +33,20 @@ public class PlayerInput : MonoBehaviour
         if (ground.GetColliderType(cellPosDefault) 
             != UnityEngine.Tilemaps.Tile.ColliderType.Sprite) return;
 
-        if (CanPlaceTurret(cellPosCentered))
+        var turretCost = turretsPrefabs[_spawnID].GetComponent<Turret>().cost;
+        if (CurrencyManager.Instance.CanSpendCurrency(turretCost) && CanPlaceTurret(cellPosCentered))
         {
             GameObject g = Instantiate(invisibleTurretPrefab, cellPosCentered, Quaternion.identity);
             if (EnemySpawner.Instance.IsPathAvailable())
             {
                 Destroy(g);
                 Instantiate(turretsPrefabs[_spawnID], cellPosCentered, Quaternion.identity);
+                CurrencyManager.Instance.SpendCurrency(turretCost);
                 EnemySpawner.Instance.RecalculatePaths();
                 DeselectTowers();
                 ground.SetColliderType(cellPosDefault, UnityEngine.Tilemaps.Tile.ColliderType.None);
             }
-            else
-            {
-                
-                Destroy(g);
-                Debug.Log("NO");
-            }
+            DeselectTowers();
         }
         else
         {
