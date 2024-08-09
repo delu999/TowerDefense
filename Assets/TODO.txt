@@ -16,7 +16,7 @@
 
 - far vedere la vita ai nemici
 
-- finire turretshop, facendo vedere nome, costo 
+- finire turretshop, facendo vedere nome, costo, fixare immagini torrette
 
 - finire ui delle turret shop
 

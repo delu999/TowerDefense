@@ -137,12 +137,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 5415405362984598979}
-  moveSpeed: 0.5
+  moveSpeed: 1
   maxHealth: 3
   turretMask:
     serializedVersion: 2
     m_Bits: 64
   damageToBase: 1
+  reward: 10
 --- !u!50 &5415405362984598979
 Rigidbody2D:
   serializedVersion: 4

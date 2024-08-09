@@ -16,10 +16,10 @@ public class GameOverScreen : MonoBehaviour
     {
         Time.timeScale = 1;
         
-        if (BaseLife.main is not null)
+        if (BaseLife.Instance is not null)
         {
-            Destroy(BaseLife.main.gameObject);
-            BaseLife.main = null;
+            Destroy(BaseLife.Instance.gameObject);
+            // BaseLife.Instance = null; game over (TODO da sistemare facendo il reset)
         }
         
         SceneManager.LoadScene(originalSceneName);

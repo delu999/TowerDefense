@@ -4,6 +4,7 @@ using UnityEngine;
 public class CurrencyManager : MonoBehaviour
 {
     [SerializeField] public int statingCurrency = 100;
+    
     public static CurrencyManager Instance { get; private set; }
     public int Balance { get; private set; }
     

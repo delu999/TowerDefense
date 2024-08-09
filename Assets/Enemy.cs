@@ -45,7 +45,7 @@ public class Enemy : MonoBehaviour
             if (_pathIndex >= _path.Count)
             {
                 // The enemy has reached his target
-                BaseLife.main.DecreaseLife(damageToBase);
+                BaseLife.Instance.DecreaseLife(damageToBase);
                 Destroy(gameObject);
             }
         }

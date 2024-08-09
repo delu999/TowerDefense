@@ -4,28 +4,27 @@ using UnityEngine.SceneManagement;
 public class BaseLife : MonoBehaviour
 {
     public int startingLife = 20;
-    private int _currentLife;
-
-    public static BaseLife main;
+    public int CurrentLife { get; private set; }
     
+    public static BaseLife Instance { get; private set; }
+
     private void Awake()
     {
-        if (main is null)
+        if (Instance is not null && Instance != this)
         {
-            _currentLife = startingLife;
-            main = this;
-            DontDestroyOnLoad(gameObject);
+            Destroy(this);
         }
         else
         {
-            Destroy(gameObject);
+            CurrentLife = startingLife;
+            Instance = this;
         }
     }
 
     public void DecreaseLife(int amount = 1)
     {
-        _currentLife -= amount;
-        if (_currentLife <= 0)
+        CurrentLife -= amount;
+        if (CurrentLife <= 0)
         {
             GameOver();
         }
