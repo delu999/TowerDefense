@@ -46,6 +46,8 @@ public class PlayerInput : MonoBehaviour
             }
             else
             {
+                
+                Destroy(g);
                 Debug.Log("NO");
             }
         }

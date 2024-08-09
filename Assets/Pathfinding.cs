@@ -92,7 +92,12 @@ public class Pathfinding
     private bool IsCellOccupied(Vector3Int cellPosition)
     {
         Vector3 worldPosition = _tilemap.GetCellCenterWorld(cellPosition);
-        if (!_tilemap.HasTile(cellPosition)) return false;
+
+        if (!_tilemap.HasTile(cellPosition))
+        {
+            return true;
+        }
+
         return Physics2D.OverlapCircle(worldPosition, 0.25f, _colliderMasks) != null;
     }
 }

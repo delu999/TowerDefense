@@ -53,7 +53,11 @@ public class Enemy : MonoBehaviour
     {
         if (_isRecalculatingPath) return;
 
-        if (_path == null || _pathIndex >= _path.Count) return;
+        if (_path == null || _pathIndex >= _path.Count)
+        {
+            rb.velocity = new Vector2(0f, 0f);
+            return;
+        }
 
         var direction = (_path[_pathIndex] - (Vector2)transform.position).normalized;
         rb.velocity = direction * moveSpeed;
