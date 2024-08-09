@@ -8,6 +8,6 @@ public class UIManager : MonoBehaviour
 
     private void OnGUI() {
         currencyUI.text = CurrencyManager.Instance.Balance.ToString();
-        healthUI.text = BaseLife.Instance.CurrentLife.ToString();
+        healthUI.text = BaseLife.Instance.GetPercentage().ToString();
     }
 }

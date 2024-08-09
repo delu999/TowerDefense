@@ -36,4 +36,9 @@ public class BaseLife : MonoBehaviour
         Time.timeScale = 0;
         SceneManager.LoadScene("GameOverScene");
     }
+
+    public int GetPercentage()
+    {
+        return (int)((float)CurrentLife / startingLife * 100);
+    }
 }
