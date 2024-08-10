@@ -18,8 +18,16 @@ public class GameOverScreen : MonoBehaviour
         
         if (BaseLife.Instance is not null)
         {
+            BaseLife.Instance.StopAllCoroutines();
             Destroy(BaseLife.Instance.gameObject);
-            // BaseLife.Instance = null; game over (TODO da sistemare facendo il reset)
+            BaseLife.Instance.Restore();
+        }
+        
+        if (EnemySpawner.Instance is not null)
+        {
+            EnemySpawner.Instance.StopAllCoroutines();
+            Destroy(EnemySpawner.Instance.gameObject);
+            EnemySpawner.Instance.Restore();
         }
         
         SceneManager.LoadScene(originalSceneName);

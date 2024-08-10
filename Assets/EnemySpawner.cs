@@ -22,11 +22,12 @@ public class EnemySpawner : MonoBehaviour
     {
         if (Instance is not null && Instance != this)
         {
-            Destroy(this);
+            Destroy(gameObject);
         }
         else
         {
             Instance = this;
+            DontDestroyOnLoad(gameObject);
         }
     }
 
@@ -70,5 +71,10 @@ public class EnemySpawner : MonoBehaviour
     public void RemoveEnemy(Enemy enemy)
     {
         _enemies.Remove(enemy);
+    }
+    
+    public void Restore()
+    {
+        Instance = null;
     }
 }

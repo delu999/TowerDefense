@@ -41,4 +41,9 @@ public class BaseLife : MonoBehaviour
     {
         return (int)((float)CurrentLife / startingLife * 100);
     }
+
+    public void Restore()
+    {
+        Instance = null;
+    }
 }

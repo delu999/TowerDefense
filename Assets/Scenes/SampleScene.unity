@@ -960,7 +960,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -49.999985, y: -50}
+  m_AnchoredPosition: {x: -50, y: -50}
   m_SizeDelta: {x: 68.57001, y: 69.44}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &497728690
@@ -1245,6 +1245,10 @@ MonoBehaviour:
   - {fileID: 106207534}
   - {fileID: 497728690}
   ground: {fileID: 1340129216}
+  previewColorCanPlace: {r: 0, g: 1, b: 0, a: 0.25}
+  previewColorCannotPlace: {r: 1, g: 0, b: 0, a: 0.25}
+  turretPreviewPrefab: {fileID: 1524516003829438954, guid: 792295eb0b77544eda2832078b5f8f27, type: 3}
+  turretRangePreviewPrefab: {fileID: 4779790481646681720, guid: b708f84e5339841ae9496e0147575476, type: 3}
 --- !u!1 &639419362
 GameObject:
   m_ObjectHideFlags: 0
@@ -2046,8 +2050,8 @@ TilemapRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1399124547
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}

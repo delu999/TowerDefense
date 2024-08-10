@@ -1,6 +1,3 @@
-- far vedere moneta
-
-- far vedere vita corrente della base
 
 - finire ripristino game over 
 
@@ -11,8 +8,6 @@
 - aggiungere menu di avvio
 
 - aggiungere un bottone per far startare la wave (scegliere se inviare wave al click o al timer)
-
-- preview delle torrette, con range
 
 - far vedere la vita ai nemici
 
