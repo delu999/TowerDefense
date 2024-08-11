@@ -11,6 +11,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private LayerMask turretMasks;
     [SerializeField] private List<Transform> spawnPoints;
     [SerializeField] private List<Transform> basePoints;
+    [SerializeField] private List<Wave> waves;
     [SerializeField] private Tilemap tilemap;
     [SerializeField] private float spawnInterval = 2f;
     private readonly List<Enemy> _enemies = new ();
@@ -41,17 +42,34 @@ public class EnemySpawner : MonoBehaviour
         StartCoroutine(SpawnEnemies());
     }
     
-    private IEnumerator SpawnEnemies() {
-        while (true) {
-            int randomEnemyPrefabID = Random.Range(0, prefabs.Count);  
-            int randomSpawnPointID = Random.Range(0, spawnPoints.Count);
-            int randomBasePointID = Random.Range(0, basePoints.Count);
+    private IEnumerator SpawnEnemies()
+    {
+        foreach (var wave in waves)
+        {
+            StartCoroutine(SpawnWave(wave));
+            yield return new WaitForSeconds(20f);
+        }
+    }
+    
+    private void SpawnEnemy(GameObject enemyToSpawn) {
+        int randomSpawnPointID = Random.Range(0, spawnPoints.Count);
+        int randomBasePointID = Random.Range(0, basePoints.Count);
 
-            GameObject spawnedEnemy = Instantiate(prefabs[randomEnemyPrefabID], spawnPoints[randomSpawnPointID].position, Quaternion.identity);
-            Enemy enemy = spawnedEnemy.GetComponent<Enemy>();
-            _enemies.Add(enemy);
-            enemy.Init(spawnPoints[randomSpawnPointID].position, basePoints[randomBasePointID].position, tilemap);
-            yield return new WaitForSeconds(spawnInterval);
+        GameObject spawnedEnemy = Instantiate(enemyToSpawn, spawnPoints[randomSpawnPointID].position, Quaternion.identity);
+        Enemy enemy = spawnedEnemy.GetComponent<Enemy>();
+        _enemies.Add(enemy);
+        enemy.Init(spawnPoints[randomSpawnPointID].position, basePoints[randomBasePointID].position, tilemap);
+    }
+    
+    private IEnumerator SpawnWave(Wave wave)
+    {
+        for (int i = 0; i < wave.enemyPrefabs.Length; i++)
+        {
+            for (int j = 0; j < wave.counts[i]; j++)
+            {
+                SpawnEnemy(wave.enemyPrefabs[i]);
+                yield return new WaitForSeconds(1f / wave.rate);
+            }
         }
     }
     

@@ -112,7 +112,7 @@ MonoBehaviour:
   rb: {fileID: 5415405362984598979}
   turretMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
 --- !u!1 &2068195464361551890
 GameObject:
   m_ObjectHideFlags: 0
