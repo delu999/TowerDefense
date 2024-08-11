@@ -8,6 +8,7 @@ public class PlayerInput : MonoBehaviour
 {
     [SerializeField] private LayerMask colliderMasks;
     [SerializeField] private List<GameObject> turretsPrefabs;
+    [SerializeField] private List<int> turretsCost;
     [SerializeField] private GameObject invisibleTurretPrefab;
     [SerializeField] private List<Image> turretsUI;
     [SerializeField] private Tilemap ground;
@@ -43,7 +44,7 @@ public class PlayerInput : MonoBehaviour
         if (ground.GetColliderType(cellPosDefault) 
             != UnityEngine.Tilemaps.Tile.ColliderType.Sprite) return;
 
-        var turretCost = turretsPrefabs[_spawnID].GetComponent<Turret>().GetCost();
+        var turretCost = turretsCost[_spawnID];
         if (CurrencyManager.Instance.CanSpendCurrency(turretCost) && CanPlaceTurret(cellPosCentered))
         {
             GameObject g = Instantiate(invisibleTurretPrefab, cellPosCentered, Quaternion.identity);
@@ -85,7 +86,7 @@ public class PlayerInput : MonoBehaviour
             return;
         }
 
-        bool canPlace = CanPlaceTurret(cellPosCentered);
+        bool canPlace = CanPlaceTurret(cellPosCentered) && CurrencyManager.Instance.CanSpendCurrency(turretsCost[_spawnID]);
         _currentTurretPreview.transform.position = cellPosCentered;
         _currentTurretRangePreview.transform.position = _currentTurretPreview.transform.position;
         _currentTurretRangePreview.transform.localScale = new Vector3(turretsPrefabs[_spawnID].GetComponent<Turret>().GetRange(), turretsPrefabs[_spawnID].GetComponent<Turret>().GetRange(), 1f);

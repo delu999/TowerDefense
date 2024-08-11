@@ -1,6 +1,6 @@
 public class VulcanTurret : Turret
 {
-    void Start()
+    protected override void Init()
     {
         name = "Vulcan Turret";
         cost = 5;

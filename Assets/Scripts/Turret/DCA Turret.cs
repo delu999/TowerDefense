@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class DCA : Turret
 {
-    void Start()
+    protected override void Init()
     {
         name = "Defense Control Artillery";
         cost = 50;

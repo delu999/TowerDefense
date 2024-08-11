@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Wall : Turret
 {
-    void Start()
+    protected override void Init()
     {
         name = "Wall";
         cost = 2;

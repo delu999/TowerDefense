@@ -1,6 +1,6 @@
 public class PlasmaTurret : Turret
 {
-    void Start()
+    protected override void Init()
     {
         name = "Plasma Turret";
         cost = 15;

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MissileTurret : Turret
 {
-    void Start()
+    protected override void Init()
     {
         name = "Missile Turret";
         cost = 20;

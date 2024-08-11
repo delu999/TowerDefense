@@ -2,8 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 
-public class Turret : MonoBehaviour
+public abstract class Turret : MonoBehaviour
 {
     [SerializeField] protected Bullet bulletPrefab;
     [SerializeField] protected LayerMask enemyMask;
@@ -21,8 +22,11 @@ public class Turret : MonoBehaviour
     
     private void Start()
     {
+        Init();
         _fireCountdown = 1f / fireRate;
     }
+
+    protected abstract void Init();
    
     private void Update() {
         try {
@@ -88,7 +92,7 @@ public class Turret : MonoBehaviour
         return range;
     }
     
-    public int GetCost()
+    public virtual int GetCost()
     {
         return cost;
     }

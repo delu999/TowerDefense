@@ -5,7 +5,7 @@ public class FreezeTurret : Turret
 {
     private float _freezeTime;
     
-    void Start()
+    protected override void Init()
     {
         name = "Freeze Turret";
         cost = 50;
