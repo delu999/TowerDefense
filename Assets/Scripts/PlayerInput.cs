@@ -43,7 +43,7 @@ public class PlayerInput : MonoBehaviour
         if (ground.GetColliderType(cellPosDefault) 
             != UnityEngine.Tilemaps.Tile.ColliderType.Sprite) return;
 
-        var turretCost = turretsPrefabs[_spawnID].GetComponent<Turret>().cost;
+        var turretCost = turretsPrefabs[_spawnID].GetComponent<Turret>().GetCost();
         if (CurrencyManager.Instance.CanSpendCurrency(turretCost) && CanPlaceTurret(cellPosCentered))
         {
             GameObject g = Instantiate(invisibleTurretPrefab, cellPosCentered, Quaternion.identity);
@@ -88,7 +88,7 @@ public class PlayerInput : MonoBehaviour
         bool canPlace = CanPlaceTurret(cellPosCentered);
         _currentTurretPreview.transform.position = cellPosCentered;
         _currentTurretRangePreview.transform.position = _currentTurretPreview.transform.position;
-        _currentTurretRangePreview.transform.localScale = new Vector3(turretsPrefabs[_spawnID].GetComponent<Turret>().range, turretsPrefabs[_spawnID].GetComponent<Turret>().range, 1f);
+        _currentTurretRangePreview.transform.localScale = new Vector3(turretsPrefabs[_spawnID].GetComponent<Turret>().GetRange(), turretsPrefabs[_spawnID].GetComponent<Turret>().GetRange(), 1f);
         _currentTurretPreview.SetActive(true);
         _currentTurretRangePreview.SetActive(true);
     

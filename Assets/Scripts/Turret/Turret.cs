@@ -5,18 +5,19 @@ using UnityEngine;
 
 public class Turret : MonoBehaviour
 {
-    [SerializeField] public float range = 3f;
-    [SerializeField] private float fireRate = 1f;
-    [SerializeField] private float rotationSpeed = 400f;
-    [SerializeField] private int damage = 1;
-    [SerializeField] public int cost = 50;
-    [SerializeField] private Bullet bulletPrefab;
+    [SerializeField] protected Bullet bulletPrefab;
     [SerializeField] private LayerMask enemyMask;
-    [SerializeField] private Transform firingPoint;
+    [SerializeField] protected Transform firingPoint;
     [SerializeField] private Transform turretRotationPoint;
 
+    private string name;
+    protected float range;
+    protected float fireRate;
+    protected int damage;
+    protected int cost;
+    private float rotationSpeed = 400f;
     private float _fireCountdown;
-    private Enemy _targetEnemy;
+    protected Enemy _targetEnemy;
     
     private void Start()
     {
@@ -67,7 +68,7 @@ public class Turret : MonoBehaviour
         turretRotationPoint.rotation = Quaternion.RotateTowards(turretRotationPoint.rotation, targetRotation, rotationSpeed * Time.deltaTime);
     }
    
-    private void Shoot()
+    protected virtual void Shoot()
     {
         if (_targetEnemy is null) return;
    
@@ -82,8 +83,13 @@ public class Turret : MonoBehaviour
         bulletObj.Init( firingPoint, _targetEnemy.transform, GetRange(), damage);
     }
    
-    private float GetRange()
+    public float GetRange()
     {
-        return range; //range * _tileSize;
+        return range;
+    }
+    
+    public int GetCost()
+    {
+        return cost;
     }
 }
