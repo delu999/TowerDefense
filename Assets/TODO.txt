@@ -1,13 +1,9 @@
 
 - finire ripristino game over
 
-- finire nemici volanti (renderli targettabili solo da alcune torrette)
-
 - aggiungere menu di avvio
 
 - aggiungere un bottone per far startare la wave (scegliere se inviare wave al click o al timer)
-
-- far vedere la vita ai nemici (forse no, prebbe venire bruttino)
 
 - finire turretshop, facendo vedere nome, costo
 

@@ -782,10 +782,6 @@ MonoBehaviour:
     - {fileID: 1655209499408274660, guid: 90fc838bec66c4c54983eec600b5fb5b, type: 3}
     counts: 0a00000005000000
     rate: 1
-  - enemyPrefabs:
-    - {fileID: 1655209499408274660, guid: 2ead0eca6d73b46c1b5edf590f615bc9, type: 3}
-    counts: d0070000
-    rate: 100
   tilemap: {fileID: 1340129216}
   spawnInterval: 1
 --- !u!1 &360115802
@@ -2647,7 +2643,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1399124547
-  m_SortingLayer: 4
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
