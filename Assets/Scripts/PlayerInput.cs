@@ -104,8 +104,10 @@ public class PlayerInput : MonoBehaviour
         if (_currentTurretPreview is not null)
         {
             _currentTurretPreview.SetActive(false);
+            Destroy(_currentTurretPreview);
             _currentTurretPreview = null;
             _currentTurretRangePreview.SetActive(false);
+            Destroy(_currentTurretRangePreview);
             _currentTurretRangePreview = null;
         }
     }

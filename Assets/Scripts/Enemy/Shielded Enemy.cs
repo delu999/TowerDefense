@@ -10,9 +10,9 @@ public class ShieldedEnemy : Enemy
         base.Init(spawnPosition, targetPosition, ground);
     }
 
-    public override void TakeDamage(int damage)
+    public override void TakeDamage(float damage)
     {
-        int reducedDamage = Mathf.Max(1, damage / 2); // Example: reduces damage by half, but at least 1
+        float reducedDamage = Mathf.Max(1, damage / 2); // Example: reduces damage by half, but at least 1
         base.TakeDamage(reducedDamage);
     }
 }

@@ -1,29 +1,23 @@
 
-- finire ripristino game over 
+- finire ripristino game over
 
-- aggiungere altri tipi di torretta
-
-- aggiungere i muri
-
-- aggiungere altri tipi di nemici
+- finire nemici volanti (renderli targettabili solo da alcune torrette)
 
 - aggiungere menu di avvio
 
 - aggiungere un bottone per far startare la wave (scegliere se inviare wave al click o al timer)
 
-- far vedere la vita ai nemici
+- far vedere la vita ai nemici (forse no, prebbe venire bruttino)
 
-- finire turretshop, facendo vedere nome, costo, fixare immagini torrette
+- finire turretshop, facendo vedere nome, costo
 
-- finire ui delle turret shop
+- finire ui delle turret shop: mettere descrizione torretta selezionata
 
 - bilanciare potenza torrette e vita dei nemici
 
-- aggiungere background sotto le tilemap
-
 CODICE:
 
-- Rename GridManager to GameManager or LevelManager
+- Rename GridManager to GameManager or LevelManager (probabilemnte rimuoverlo in Qanto fa sol ostartare la wave)
 
 - Add sorting layers. At the moment enemy goes under the turret
 

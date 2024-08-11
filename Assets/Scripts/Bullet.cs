@@ -11,7 +11,7 @@ public class Bullet : MonoBehaviour
     private Transform _origin;
     private Transform _target;
     private float _range;
-    private int _damage;
+    private float _damage;
 
      private void Update()
      {
@@ -21,7 +21,7 @@ public class Bullet : MonoBehaviour
          }
      }
     
-     public void Init(Transform origin, Transform target, float range, int damage) {
+     public void Init(Transform origin, Transform target, float range, float damage) {
          _target = target;
          _range = range;
          _origin = origin;

@@ -12,14 +12,15 @@ public class Enemy : MonoBehaviour
     
     private int damageToBase = 1;
     private float moveSpeed = 1f;
-    protected int maxHealth = 3;
+    private float moveSpeedScalingFactor = 1f;
+    protected float maxHealth = 3;
     protected int reward = 10;
 
     private Pathfinding _pathfinding;
     private List<Vector2> _path;
     private Vector2 _targetPosition;
     private bool _isRecalculatingPath;
-    private int _currentHealth;
+    private float _currentHealth;
     private int _pathIndex;
 
     private Vector2 _spawnPosition;
@@ -67,9 +68,14 @@ public class Enemy : MonoBehaviour
         rb.velocity = direction * GetSpeed(); // Use method to get speed
     }
 
+    public void ChangeSpeedFactor(float factor = 1f)
+    {
+        moveSpeedScalingFactor = factor;
+    }
+    
     protected virtual float GetSpeed()
     {
-        return moveSpeed;
+        return moveSpeed * moveSpeedScalingFactor;
     }
 
     protected virtual IEnumerator CalculatePathCoroutine()
@@ -95,7 +101,7 @@ public class Enemy : MonoBehaviour
         StartCoroutine(CalculatePathCoroutine());
     }
 
-    public virtual void TakeDamage(int damage)
+    public virtual void TakeDamage(float damage)
     {
         _currentHealth -= damage;
         if (_currentHealth > 0) return;

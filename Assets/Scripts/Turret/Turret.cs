@@ -6,17 +6,17 @@ using UnityEngine;
 public class Turret : MonoBehaviour
 {
     [SerializeField] protected Bullet bulletPrefab;
-    [SerializeField] private LayerMask enemyMask;
+    [SerializeField] protected LayerMask enemyMask;
     [SerializeField] protected Transform firingPoint;
     [SerializeField] private Transform turretRotationPoint;
 
     private string name;
     protected float range;
     protected float fireRate;
-    protected int damage;
+    protected float damage;
     protected int cost;
     private float rotationSpeed = 400f;
-    private float _fireCountdown;
+    protected float _fireCountdown;
     protected Enemy _targetEnemy;
     
     private void Start()
