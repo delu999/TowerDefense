@@ -3,6 +3,8 @@
 
 - aggiungere altri tipi di torretta
 
+- aggiungere i muri
+
 - aggiungere altri tipi di nemici
 
 - aggiungere menu di avvio
