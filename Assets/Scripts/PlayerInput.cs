@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.UI;
+using TMPro;
 
 public class PlayerInput : MonoBehaviour
 {
     [SerializeField] private LayerMask colliderMasks;
     [SerializeField] private List<GameObject> turretsPrefabs;
     [SerializeField] private List<int> turretsCost;
+    [SerializeField] private List<string> turretsDescriptions;
     [SerializeField] private GameObject invisibleTurretPrefab;
     [SerializeField] private List<Image> turretsUI;
     [SerializeField] private Tilemap ground;
@@ -21,12 +23,19 @@ public class PlayerInput : MonoBehaviour
     private GameObject _currentTurretPreview;
     private GameObject _currentTurretRangePreview;
 
+    [SerializeField] TextMeshProUGUI DescriptionUI;
+    
     private void Update()
     {
         if (_spawnID != -1)
         {
             DetectSpawnPoint();
         }        
+    }
+
+    private void OnGUI()
+    {
+        DescriptionUI.text = _spawnID != -1 ? turretsDescriptions[_spawnID] : "Select a turret";
     }
 
     private void DetectSpawnPoint()

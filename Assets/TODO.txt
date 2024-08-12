@@ -5,10 +5,6 @@
 
 - aggiungere un bottone per far startare la wave (scegliere se inviare wave al click o al timer)
 
-- finire turretshop, facendo vedere nome, costo
-
-- finire ui delle turret shop: mettere descrizione torretta selezionata
-
 - bilanciare potenza torrette e vita dei nemici
 
 CODICE:
