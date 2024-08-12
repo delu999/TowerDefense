@@ -8,4 +8,9 @@ public class PlasmaTurret : Turret
         fireRate = 0.5f; // Fast speed
         damage = 5;
     }
+    
+    public override float GetRange()
+    {
+        return 5f;
+    }
 }

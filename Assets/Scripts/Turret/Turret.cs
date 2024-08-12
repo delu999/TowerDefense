@@ -87,7 +87,7 @@ public abstract class Turret : MonoBehaviour
         bulletObj.Init( firingPoint, _targetEnemy.transform, GetRange(), damage);
     }
    
-    public float GetRange()
+    public virtual float GetRange()
     {
         return range;
     }

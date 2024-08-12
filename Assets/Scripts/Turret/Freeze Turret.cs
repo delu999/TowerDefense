@@ -46,4 +46,9 @@ public class FreezeTurret : Turret
 
         e.ChangeSpeedFactor();
     }
+    
+    public override float GetRange()
+    {
+        return 3f;
+    }
 }

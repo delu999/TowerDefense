@@ -1,12 +1,9 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
     [SerializeField] private Rigidbody2D rb;
-    [SerializeField] private float bulletSpeed = 10f;
+    [SerializeField] protected float bulletSpeed = 10f;
     
     private Transform _origin;
     private Transform _target;
@@ -56,5 +53,10 @@ public class Bullet : MonoBehaviour
     
          Quaternion targetRotation = Quaternion.Euler(new Vector3(0f, 0f, angle));
          transform.rotation = targetRotation;
+     }
+
+     public float GetDamage()
+     {
+         return _damage;
      }
 }

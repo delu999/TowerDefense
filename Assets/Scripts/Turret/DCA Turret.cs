@@ -36,4 +36,9 @@ public class DCA : Turret
             yield return new WaitForSeconds(0.1f);
         }
     }
+    
+    public override float GetRange()
+    {
+        return 4f;
+    }
 }

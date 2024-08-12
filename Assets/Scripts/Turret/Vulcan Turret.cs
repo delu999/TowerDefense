@@ -8,4 +8,9 @@ public class VulcanTurret : Turret
         fireRate = 1f; // Slow speed
         damage = 10;
     }
+
+    public override float GetRange()
+    {
+        return 4f;
+    }
 }

@@ -12,4 +12,9 @@ public class MissileTurret : Turret
         fireRate = 2f; // Very slow speed
         damage = 8;
     }
+    
+    public override float GetRange()
+    {
+        return 6f;
+    }
 }
