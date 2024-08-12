@@ -53,6 +53,7 @@ public abstract class Turret : MonoBehaviour
    
     private void FindTarget() {
         Collider2D[] colliders = new Collider2D[30];
+        Debug.Log(GetRange());
         int size = Physics2D.OverlapCircleNonAlloc(transform.position, GetRange(), colliders, enemyMask);
         if (size == 0)
         {

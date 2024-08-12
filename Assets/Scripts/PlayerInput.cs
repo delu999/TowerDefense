@@ -98,7 +98,7 @@ public class PlayerInput : MonoBehaviour
         bool canPlace = CanPlaceTurret(cellPosCentered) && CurrencyManager.Instance.CanSpendCurrency(turretsCost[_spawnID]);
         _currentTurretPreview.transform.position = cellPosCentered;
         _currentTurretRangePreview.transform.position = _currentTurretPreview.transform.position;
-        var range = turretsPrefabs[_spawnID].GetComponent<Turret>().GetRange();
+        var range = turretsPrefabs[_spawnID].GetComponent<Turret>().GetRange() * 2;
         _currentTurretRangePreview.transform.localScale = new Vector3(range, range, 1f);
         _currentTurretPreview.SetActive(true);
         _currentTurretRangePreview.SetActive(true);
