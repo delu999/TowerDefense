@@ -1125,6 +1125,10 @@ MonoBehaviour:
     - {fileID: 1655209499408274660, guid: 90fc838bec66c4c54983eec600b5fb5b, type: 3}
     counts: 0a00000005000000
     rate: 1
+  - enemyPrefabs:
+    - {fileID: 1655209499408274660, guid: 2ead0eca6d73b46c1b5edf590f615bc9, type: 3}
+    counts: c8000000
+    rate: 100
   tilemap: {fileID: 1340129216}
   spawnInterval: 1
 --- !u!1 &360115802
@@ -2312,6 +2316,13 @@ MonoBehaviour:
   - {fileID: 6772062096461808707, guid: 79624f3be947847a4b59d758df50b949, type: 3}
   - {fileID: 6772062096461808707, guid: a43116c71c514491db3bb4cbf86dc722, type: 3}
   turretsCost: 02000000050000000f000000140000003200000032000000
+  turretsDescriptions:
+  - Basic wall for blocking or redirecting enemy paths.
+  - Basic gun turret.
+  - Quick firing turret.
+  - Slow firing turret that damages an area on the ground.
+  - Turret that fires 4 missiles at a time.
+  - Damages and freezes enemies to slow them down.
   invisibleTurretPrefab: {fileID: 1524516003829438954, guid: 792295eb0b77544eda2832078b5f8f27, type: 3}
   turretsUI:
   - {fileID: 106207534}
@@ -2321,6 +2332,7 @@ MonoBehaviour:
   previewColorCannotPlace: {r: 1, g: 0, b: 0, a: 0.25}
   turretPreviewPrefab: {fileID: 1524516003829438954, guid: 792295eb0b77544eda2832078b5f8f27, type: 3}
   turretRangePreviewPrefab: {fileID: 4779790481646681720, guid: b708f84e5339841ae9496e0147575476, type: 3}
+  DescriptionUI: {fileID: 1421076323}
 --- !u!1 &639419362
 GameObject:
   m_ObjectHideFlags: 0
@@ -6840,7 +6852,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
   m_AnchoredPosition: {x: 0, y: 64}
-  m_SizeDelta: {x: 0, y: 128}
+  m_SizeDelta: {x: -20, y: 108}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1421076323
 MonoBehaviour:
@@ -6862,7 +6874,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Seleziona una torretta
+  m_text: Select a turret
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -6889,8 +6901,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
