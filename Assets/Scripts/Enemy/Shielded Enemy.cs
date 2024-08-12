@@ -6,7 +6,7 @@ public class ShieldedEnemy : Enemy
     public override void Init(Vector2 spawnPosition, Vector2 targetPosition, Tilemap ground)
     {
         maxHealth = 20;
-        reward = 40;
+        reward = 5;
         base.Init(spawnPosition, targetPosition, ground);
     }
 

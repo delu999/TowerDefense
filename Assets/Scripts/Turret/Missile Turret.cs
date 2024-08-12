@@ -15,6 +15,6 @@ public class MissileTurret : Turret
     
     public override float GetRange()
     {
-        return 6f;
+        return 6f/2;
     }
 }

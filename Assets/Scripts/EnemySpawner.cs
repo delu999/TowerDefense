@@ -1,9 +1,9 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using Random = UnityEngine.Random;
+using UnityEngine.UI;
 
 public class EnemySpawner : MonoBehaviour
 {
@@ -17,6 +17,8 @@ public class EnemySpawner : MonoBehaviour
     private readonly List<Enemy> _enemies = new ();
     private Pathfinding _pathfinding;
 
+    public Button startWaveButton;
+    
     public static EnemySpawner Instance { get; private set; }
 
     private void Awake()
@@ -35,6 +37,7 @@ public class EnemySpawner : MonoBehaviour
     private void Start()
     {
         _pathfinding = new Pathfinding(turretMasks, tilemap);
+        startWaveButton.onClick.AddListener(StartSpawning);
     }
 
     public void StartSpawning()
@@ -44,11 +47,13 @@ public class EnemySpawner : MonoBehaviour
     
     private IEnumerator SpawnEnemies()
     {
+        startWaveButton.interactable = false;
         foreach (var wave in waves)
         {
             StartCoroutine(SpawnWave(wave));
-            yield return new WaitForSeconds(20f);
+            yield return new WaitForSeconds(10f);
         }
+        startWaveButton.interactable = true;
     }
     
     private void SpawnEnemy(GameObject enemyToSpawn) {

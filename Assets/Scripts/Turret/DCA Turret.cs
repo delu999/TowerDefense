@@ -39,6 +39,6 @@ public class DCA : Turret
     
     public override float GetRange()
     {
-        return 4f;
+        return 4f/2;
     }
 }

@@ -8,6 +8,6 @@ public class GridManager : MonoBehaviour
 {
     private void Start()
     {
-        EnemySpawner.Instance.StartSpawning();
+        //EnemySpawner.Instance.StartSpawning();
     }
 }

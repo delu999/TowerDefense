@@ -11,6 +11,6 @@ public class PlasmaTurret : Turret
     
     public override float GetRange()
     {
-        return 5f;
+        return 5f/2;
     }
 }

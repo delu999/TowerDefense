@@ -3,7 +3,7 @@
 
 - aggiungere menu di avvio
 
-- aggiungere un bottone per far startare la wave (scegliere se inviare wave al click o al timer)
+- aggiuto un bottone per far startare la wave (scegliere se inviare wave successive al click oltre che al timer)
 
 - bilanciare potenza torrette e vita dei nemici
 

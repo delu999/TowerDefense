@@ -49,6 +49,6 @@ public class FreezeTurret : Turret
     
     public override float GetRange()
     {
-        return 3f;
+        return 3f/2;
     }
 }

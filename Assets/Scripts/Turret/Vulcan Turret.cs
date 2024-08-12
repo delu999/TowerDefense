@@ -11,6 +11,6 @@ public class VulcanTurret : Turret
 
     public override float GetRange()
     {
-        return 4f;
+        return 4f/2;
     }
 }
