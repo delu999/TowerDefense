@@ -18,8 +18,6 @@ CODICE:
 
 - Rename GridManager to GameManager or LevelManager (probabilemnte rimuoverlo in Qanto fa sol ostartare la wave)
 
-- Add sorting layers. At the moment enemy goes under the turret
-
 - Refactoring generale
 
 
