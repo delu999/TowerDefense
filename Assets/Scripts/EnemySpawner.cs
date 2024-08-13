@@ -1,9 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using Random = UnityEngine.Random;
 using UnityEngine.UI;
+using TMPro;
 
 public class EnemySpawner : MonoBehaviour
 {
@@ -18,6 +20,8 @@ public class EnemySpawner : MonoBehaviour
     private Pathfinding _pathfinding;
 
     public Button startWaveButton;
+    public TextMeshProUGUI waveUI;
+    private int _currentWave;
     
     public static EnemySpawner Instance { get; private set; }
 
@@ -40,8 +44,14 @@ public class EnemySpawner : MonoBehaviour
         startWaveButton.onClick.AddListener(StartSpawning);
     }
 
+    private void OnGUI()
+    {
+        waveUI.text = _currentWave.ToString();
+    }
+
     public void StartSpawning()
     {
+        _currentWave = 0;
         StartCoroutine(SpawnEnemies());
     }
     
@@ -50,6 +60,7 @@ public class EnemySpawner : MonoBehaviour
         startWaveButton.interactable = false;
         foreach (var wave in waves)
         {
+            _currentWave++;
             StartCoroutine(SpawnWave(wave));
             yield return new WaitForSeconds(10f);
         }

@@ -10,8 +10,8 @@ public class FastEnemy : Enemy
 
     public override void Init(Vector2 spawnPosition, Vector2 targetPosition, Tilemap ground)
     {
-        maxHealth = 5;
-        reward = 5;
+        maxHealth = 25;
+        reward = 3;
         base.Init(spawnPosition, targetPosition, ground);
     }
 }

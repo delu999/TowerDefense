@@ -13,7 +13,7 @@ public class Enemy : MonoBehaviour
     private int damageToBase = 1;
     private float moveSpeed = 1f;
     private float moveSpeedScalingFactor = 1f;
-    protected float maxHealth = 3;
+    protected float maxHealth = 20;
     protected int reward = 2;
 
     private Pathfinding _pathfinding;

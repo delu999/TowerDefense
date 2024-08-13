@@ -14,8 +14,6 @@
 - decidere se fare l'upgrade (avevamo detto di no, ma potrebbero lamentrane la mancanza essendo una delle cose base di questa categoria)
    - putroppo il gioco sembra decisamente semplice ripetto ad altri in quanto la telecamera rimane ferma
 
-- decidere se aggiungere un contatore delle wave fatte (in UI accanto al cash e alla vita della base)
-
 CODICE:
 
 - Rename GridManager to GameManager or LevelManager (probabilemnte rimuoverlo in Qanto fa sol ostartare la wave)
