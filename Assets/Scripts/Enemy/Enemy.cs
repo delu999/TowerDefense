@@ -15,6 +15,7 @@ public class Enemy : MonoBehaviour
     private float moveSpeedScalingFactor = 1f;
     protected float maxHealth = 20;
     protected int reward = 2;
+    protected float difficulty;
 
     private Pathfinding _pathfinding;
     private List<Vector2> _path;
@@ -78,7 +79,7 @@ public class Enemy : MonoBehaviour
         return moveSpeed * moveSpeedScalingFactor;
     }
 
-    protected virtual IEnumerator CalculatePathCoroutine()
+    private IEnumerator CalculatePathCoroutine()
     {
         _isRecalculatingPath = true;
         _path = _pathfinding.FindPath(transform.position, _targetPosition);
@@ -110,7 +111,7 @@ public class Enemy : MonoBehaviour
         Destroy(gameObject);
     }
 
-    protected virtual void RotateTowardsTarget()
+    private void RotateTowardsTarget()
     {
         if (_path is null) return;
         float angle = Mathf.Atan2(_path[_pathIndex].y - transform.position.y, _path[_pathIndex].x - transform.position.x) * Mathf.Rad2Deg - 90f;
@@ -122,5 +123,13 @@ public class Enemy : MonoBehaviour
     protected virtual void OnDestroy()
     {
         EnemySpawner.Instance.RemoveEnemy(this);
+    }
+    
+    public void SetDifficulty(float _difficulty)
+    {
+        difficulty = _difficulty;
+        _currentHealth *= difficulty;
+        reward = Mathf.RoundToInt(reward / difficulty);
+        if (reward < 1) reward = 1;
     }
 }

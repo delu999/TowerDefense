@@ -1075,72 +1075,85 @@ MonoBehaviour:
     - {fileID: 1655209499408274660, guid: ed386d334b00bcc3285138fd8919ad91, type: 3}
     counts: 0a000000
     rate: 1
+    difficulty: 1
   - enemyPrefabs:
     - {fileID: 1655209499408274660, guid: ed386d334b00bcc3285138fd8919ad91, type: 3}
     - {fileID: 1655209499408274660, guid: 5868680636dc141d7a26860ba067cc1b, type: 3}
     counts: 0f00000005000000
     rate: 1.5
+    difficulty: 1
   - enemyPrefabs:
     - {fileID: 1655209499408274660, guid: ed386d334b00bcc3285138fd8919ad91, type: 3}
     - {fileID: 1655209499408274660, guid: 5868680636dc141d7a26860ba067cc1b, type: 3}
     - {fileID: 1655209499408274660, guid: 6e5bb20f13baf43ff9b8b2ca82117e4a, type: 3}
     counts: 0a0000000500000005000000
     rate: 1.5
+    difficulty: 2
   - enemyPrefabs:
     - {fileID: 1655209499408274660, guid: 5868680636dc141d7a26860ba067cc1b, type: 3}
     - {fileID: 1655209499408274660, guid: 6e5bb20f13baf43ff9b8b2ca82117e4a, type: 3}
     counts: 1400000005000000
     rate: 2
+    difficulty: 3
   - enemyPrefabs:
     - {fileID: 1655209499408274660, guid: 2ead0eca6d73b46c1b5edf590f615bc9, type: 3}
     - {fileID: 1655209499408274660, guid: 90fc838bec66c4c54983eec600b5fb5b, type: 3}
     counts: 0a00000005000000
     rate: 2
+    difficulty: 4
   - enemyPrefabs:
     - {fileID: 1655209499408274660, guid: ed386d334b00bcc3285138fd8919ad91, type: 3}
     - {fileID: 1655209499408274660, guid: 5868680636dc141d7a26860ba067cc1b, type: 3}
     - {fileID: 1655209499408274660, guid: 6e5bb20f13baf43ff9b8b2ca82117e4a, type: 3}
     counts: 0a0000000a0000000a000000
     rate: 2.5
+    difficulty: 5
   - enemyPrefabs:
     - {fileID: 1655209499408274660, guid: 5868680636dc141d7a26860ba067cc1b, type: 3}
     - {fileID: 1655209499408274660, guid: 2ead0eca6d73b46c1b5edf590f615bc9, type: 3}
     - {fileID: 1655209499408274660, guid: 90fc838bec66c4c54983eec600b5fb5b, type: 3}
     counts: 0f0000000500000005000000
     rate: 2.5
+    difficulty: 6
   - enemyPrefabs:
     - {fileID: 1655209499408274660, guid: ed386d334b00bcc3285138fd8919ad91, type: 3}
     - {fileID: 1655209499408274660, guid: 6e5bb20f13baf43ff9b8b2ca82117e4a, type: 3}
     - {fileID: 1655209499408274660, guid: 90fc838bec66c4c54983eec600b5fb5b, type: 3}
     counts: 140000000a00000005000000
     rate: 3
+    difficulty: 7
   - enemyPrefabs:
     - {fileID: 1655209499408274660, guid: 2ead0eca6d73b46c1b5edf590f615bc9, type: 3}
     - {fileID: 1655209499408274660, guid: 5868680636dc141d7a26860ba067cc1b, type: 3}
     - {fileID: 1655209499408274660, guid: 6e5bb20f13baf43ff9b8b2ca82117e4a, type: 3}
     counts: 0f0000000a0000000a000000
     rate: 3
+    difficulty: 8
   - enemyPrefabs:
     - {fileID: 1655209499408274660, guid: 7bcc080c73d994d32ba89db4c3ac87db, type: 3}
     counts: 01000000
     rate: 1
+    difficulty: 100
   - enemyPrefabs:
     - {fileID: 1655209499408274660, guid: ed386d334b00bcc3285138fd8919ad91, type: 3}
     - {fileID: 1655209499408274660, guid: 2ead0eca6d73b46c1b5edf590f615bc9, type: 3}
     - {fileID: 1655209499408274660, guid: 90fc838bec66c4c54983eec600b5fb5b, type: 3}
     counts: 140000000a0000000a000000
     rate: 4
+    difficulty: 10
   - enemyPrefabs:
     - {fileID: 1655209499408274660, guid: 2ead0eca6d73b46c1b5edf590f615bc9, type: 3}
     - {fileID: 1655209499408274660, guid: 5868680636dc141d7a26860ba067cc1b, type: 3}
     - {fileID: 1655209499408274660, guid: 6e5bb20f13baf43ff9b8b2ca82117e4a, type: 3}
     counts: 0a000000140000000a000000
     rate: 4
+    difficulty: 11
   - enemyPrefabs:
     - {fileID: 1655209499408274660, guid: 2ead0eca6d73b46c1b5edf590f615bc9, type: 3}
     - {fileID: 1655209499408274660, guid: 90fc838bec66c4c54983eec600b5fb5b, type: 3}
     counts: 0f0000000a000000
     rate: 5
+    difficulty: 12
   - enemyPrefabs:
     - {fileID: 1655209499408274660, guid: 6e5bb20f13baf43ff9b8b2ca82117e4a, type: 3}
     - {fileID: 1655209499408274660, guid: ed386d334b00bcc3285138fd8919ad91, type: 3}
@@ -1148,11 +1161,13 @@ MonoBehaviour:
     - {fileID: 1655209499408274660, guid: 2ead0eca6d73b46c1b5edf590f615bc9, type: 3}
     counts: 0a000000140000000500000005000000
     rate: 5
+    difficulty: 13
   - enemyPrefabs:
     - {fileID: 1655209499408274660, guid: 5868680636dc141d7a26860ba067cc1b, type: 3}
     - {fileID: 1655209499408274660, guid: ed386d334b00bcc3285138fd8919ad91, type: 3}
     counts: 1e00000014000000
     rate: 6
+    difficulty: 14
   tilemap: {fileID: 1340129216}
   spawnInterval: 1
   startWaveButton: {fileID: 1924619053}

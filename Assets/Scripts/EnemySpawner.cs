@@ -67,12 +67,13 @@ public class EnemySpawner : MonoBehaviour
         startWaveButton.interactable = true;
     }
     
-    private void SpawnEnemy(GameObject enemyToSpawn) {
+    private void SpawnEnemy(GameObject enemyToSpawn, float difficulty) {
         int randomSpawnPointID = Random.Range(0, spawnPoints.Count);
         int randomBasePointID = Random.Range(0, basePoints.Count);
 
         GameObject spawnedEnemy = Instantiate(enemyToSpawn, spawnPoints[randomSpawnPointID].position, Quaternion.identity);
         Enemy enemy = spawnedEnemy.GetComponent<Enemy>();
+        enemy.SetDifficulty(difficulty);
         _enemies.Add(enemy);
         enemy.Init(spawnPoints[randomSpawnPointID].position, basePoints[randomBasePointID].position, tilemap);
     }
@@ -83,7 +84,7 @@ public class EnemySpawner : MonoBehaviour
         {
             for (int j = 0; j < wave.counts[i]; j++)
             {
-                SpawnEnemy(wave.enemyPrefabs[i]);
+                SpawnEnemy(wave.enemyPrefabs[i], wave.difficulty);
                 yield return new WaitForSeconds(1f / wave.rate);
             }
         }
