@@ -129,7 +129,7 @@ public class Enemy : MonoBehaviour
     {
         difficulty = _difficulty;
         _currentHealth *= difficulty;
-        reward = Mathf.RoundToInt(reward / difficulty);
+        reward = (int)Mathf.Log(difficulty, 2f);
         if (reward < 1) reward = 1;
     }
 }

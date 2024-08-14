@@ -67,8 +67,11 @@ public class Pathfinding
             path.Add(_tilemap.GetCellCenterWorld(current));
         }
 
-        path.Reverse();
-        path.RemoveAt(0);
+        if (path.Count > 1)
+        {
+            path.Reverse();
+            path.RemoveAt(0);
+        }
         return path;
     }
 

@@ -5,8 +5,6 @@
 
 - migliorare menu di avvio e farlo funzionare
 
-- aggiuto un bottone per far startare la wave (scegliere se inviare wave successive al click oltre che al timer)
-
 - bilanciare potenza torrette e vita dei nemici (rendere decisamente più difficile il gioco e in qualche modo rendera la diffcioltà incrementale, al momento è troppo facile)
 
 - decidere se fare la vendita (rimozione) delle torrette

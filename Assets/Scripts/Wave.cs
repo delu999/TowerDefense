@@ -3,16 +3,8 @@ using UnityEngine;
 [System.Serializable]
 public class Wave
 {
-    public GameObject[] enemyPrefabs; // Array of enemy types in this wave
-    public int[] counts; // Number of each type of enemy
+    public int enemyID; // Array of enemy types in this wave
+    public int enemyNumber; // Number of each type of enemy
     public float rate; // Spawn rate for this wave
-    public float difficulty = 1; // Difficulty of the wave (between 1 and 100)
-
-    public void Initialize()
-    {
-        if (enemyPrefabs.Length != counts.Length)
-        {
-            Debug.LogError("Mismatch between enemyPrefabs and counts in wave configuration.");
-        }
-    }
+    public float difficulty = 1; // Difficulty of the wave
 }

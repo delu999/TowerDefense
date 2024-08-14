@@ -13,9 +13,9 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private LayerMask turretMasks;
     [SerializeField] private List<Transform> spawnPoints;
     [SerializeField] private List<Transform> basePoints;
-    [SerializeField] private List<Wave> waves;
     [SerializeField] private Tilemap tilemap;
     [SerializeField] private float spawnInterval = 2f;
+    [SerializeField] private int maxWaveCycles = 3;
     private readonly List<Enemy> _enemies = new ();
     private Pathfinding _pathfinding;
 
@@ -58,10 +58,13 @@ public class EnemySpawner : MonoBehaviour
     private IEnumerator SpawnEnemies()
     {
         startWaveButton.interactable = false;
-        foreach (var wave in waves)
+        float _currentDifficulty = 1f;
+        for (int i = 0; i < prefabs.Count * maxWaveCycles; i++)
         {
             _currentWave++;
-            StartCoroutine(SpawnWave(wave));
+            bool isBoss = i % prefabs.Count == prefabs.Count - 1;
+            StartCoroutine(SpawnWave(prefabs[i%prefabs.Count], isBoss ? 1 : 10, _currentDifficulty));
+            if (isBoss) _currentDifficulty *= 2;
             yield return new WaitForSeconds(10f);
         }
         startWaveButton.interactable = true;
@@ -78,15 +81,12 @@ public class EnemySpawner : MonoBehaviour
         enemy.Init(spawnPoints[randomSpawnPointID].position, basePoints[randomBasePointID].position, tilemap);
     }
     
-    private IEnumerator SpawnWave(Wave wave)
+    private IEnumerator SpawnWave(GameObject enemy, int quantity, float difficulty)
     {
-        for (int i = 0; i < wave.enemyPrefabs.Length; i++)
+        for (int j = 0; j < quantity; j++)
         {
-            for (int j = 0; j < wave.counts[i]; j++)
-            {
-                SpawnEnemy(wave.enemyPrefabs[i], wave.difficulty);
-                yield return new WaitForSeconds(1f / wave.rate);
-            }
+            SpawnEnemy(enemy, difficulty);
+            yield return new WaitForSeconds(0.5f);
         }
     }
     
