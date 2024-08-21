@@ -18,8 +18,6 @@ public class GameOverScreen : MonoBehaviour
         
         if (BaseLife.Instance is not null)
         {
-            BaseLife.Instance.StopAllCoroutines();
-            Destroy(BaseLife.Instance.gameObject);
             BaseLife.Instance.Restore();
         }
         
