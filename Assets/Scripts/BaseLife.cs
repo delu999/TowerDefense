@@ -32,8 +32,10 @@ public class BaseLife : MonoBehaviour
 
     private void GameOver()
     {
-        Debug.Log("Game Over!");
         Time.timeScale = 0;
+
+        Instance?.Restore();
+
         SceneManager.LoadScene("GameOverScene");
     }
 

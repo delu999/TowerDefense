@@ -18,8 +18,8 @@ public class Enemy : MonoBehaviour
     protected float difficulty;
 
     private Pathfinding _pathfinding;
-    private List<Vector2> _path;
-    private Vector2 _targetPosition;
+    protected List<Vector2> _path;
+    protected Vector2 _targetPosition;
     private bool _isRecalculatingPath;
     private float _currentHealth;
     private int _pathIndex;
@@ -79,7 +79,7 @@ public class Enemy : MonoBehaviour
         return moveSpeed * moveSpeedScalingFactor;
     }
 
-    private IEnumerator CalculatePathCoroutine()
+    protected virtual IEnumerator CalculatePathCoroutine()
     {
         _isRecalculatingPath = true;
         _path = _pathfinding.FindPath(transform.position, _targetPosition);

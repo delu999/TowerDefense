@@ -107,6 +107,6 @@ public class Pathfinding
             return true;
         }
 
-        return Physics2D.OverlapCircle(worldPosition, 0.25f, _colliderMasks) != null;
+        return Physics2D.OverlapCircle(worldPosition, 0.25f, _colliderMasks) is not null;
     }
 }

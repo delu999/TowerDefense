@@ -1,16 +1,11 @@
 
 - finire ripristino game over
 
-- aggiungere statistiche nel game over (cash, e wave superate)
-
-- migliorare menu di avvio e farlo funzionare
+- migliorare menu di avvio
 
 - bilanciare potenza torrette e vita dei nemici (rendere decisamente più difficile il gioco e in qualche modo rendera la diffcioltà incrementale, al momento è troppo facile)
 
 - decidere se fare la vendita (rimozione) delle torrette
-
-- decidere se fare l'upgrade (avevamo detto di no, ma potrebbero lamentrane la mancanza essendo una delle cose base di questa categoria)
-   - putroppo il gioco sembra decisamente semplice ripetto ad altri in quanto la telecamera rimane ferma
 
 CODICE:
 

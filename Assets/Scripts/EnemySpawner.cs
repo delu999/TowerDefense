@@ -21,7 +21,7 @@ public class EnemySpawner : MonoBehaviour
 
     public Button startWaveButton;
     public TextMeshProUGUI waveUI;
-    private int _currentWave;
+    public int CurrentWave { get; private set; }
     
     public static EnemySpawner Instance { get; private set; }
 
@@ -44,14 +44,9 @@ public class EnemySpawner : MonoBehaviour
         startWaveButton.onClick.AddListener(StartSpawning);
     }
 
-    private void OnGUI()
-    {
-        waveUI.text = _currentWave.ToString();
-    }
-
     public void StartSpawning()
     {
-        _currentWave = 0;
+        CurrentWave = 0;
         StartCoroutine(SpawnEnemies());
     }
     
@@ -61,7 +56,7 @@ public class EnemySpawner : MonoBehaviour
         float _currentDifficulty = 1f;
         for (int i = 0; i < prefabs.Count * maxWaveCycles; i++)
         {
-            _currentWave++;
+            CurrentWave++;
             bool isBoss = i % prefabs.Count == prefabs.Count - 1;
             StartCoroutine(SpawnWave(prefabs[i%prefabs.Count], isBoss ? 1 : 10, _currentDifficulty));
             if (isBoss) _currentDifficulty *= 2;
@@ -72,13 +67,12 @@ public class EnemySpawner : MonoBehaviour
     
     private void SpawnEnemy(GameObject enemyToSpawn, float difficulty) {
         int randomSpawnPointID = Random.Range(0, spawnPoints.Count);
-        int randomBasePointID = Random.Range(0, basePoints.Count);
 
         GameObject spawnedEnemy = Instantiate(enemyToSpawn, spawnPoints[randomSpawnPointID].position, Quaternion.identity);
         Enemy enemy = spawnedEnemy.GetComponent<Enemy>();
         enemy.SetDifficulty(difficulty);
         _enemies.Add(enemy);
-        enemy.Init(spawnPoints[randomSpawnPointID].position, basePoints[randomBasePointID].position, tilemap);
+        enemy.Init(spawnPoints[randomSpawnPointID].position, basePoints[randomSpawnPointID].position, tilemap);
     }
     
     private IEnumerator SpawnWave(GameObject enemy, int quantity, float difficulty)

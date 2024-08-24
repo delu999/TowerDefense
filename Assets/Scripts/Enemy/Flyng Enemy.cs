@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -9,7 +11,11 @@ public class FlyingEnemy : Enemy
         reward = 5;
         base.Init(spawnPosition, targetPosition, ground);
     }
-
-    // Additional logic to make this enemy only targetable by specific turrets
-    // This can be managed in the Turret class by checking if the target is a FlyingEnemy
+    
+    protected override IEnumerator CalculatePathCoroutine()
+    {
+        // FlyingEnemy ignore obstacles and go directly to the target 
+        _path = new List<Vector2> { _targetPosition };
+        yield break;
+    }
 }

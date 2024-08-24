@@ -8,11 +8,8 @@ using TMPro;
 public class PlayerInput : MonoBehaviour
 {
     [SerializeField] private LayerMask colliderMasks;
-    [SerializeField] private List<GameObject> turretsPrefabs;
-    [SerializeField] private List<int> turretsCost;
-    [SerializeField] private List<string> turretsDescriptions;
+    [SerializeField] private List<ShopItem> shopItems;
     [SerializeField] private GameObject invisibleTurretPrefab;
-    [SerializeField] private List<Image> turretsUI;
     [SerializeField] private Tilemap ground;
     private int _spawnID = -1;
     
@@ -23,8 +20,22 @@ public class PlayerInput : MonoBehaviour
     private GameObject _currentTurretPreview;
     private GameObject _currentTurretRangePreview;
 
-    [SerializeField] TextMeshProUGUI DescriptionUI;
+    public static PlayerInput Instance { get; private set; }
     
+    private void Awake()
+    {
+        if (Instance is not null && Instance != this)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            Instance = this;
+            DeselectTowers();
+            DontDestroyOnLoad(gameObject);
+        }
+    }
+
     private void Update()
     {
         if (_spawnID != -1)
@@ -33,9 +44,8 @@ public class PlayerInput : MonoBehaviour
         }        
     }
 
-    private void OnGUI()
-    {
-        DescriptionUI.text = _spawnID != -1 ? turretsDescriptions[_spawnID] : "Select a turret";
+    public string GetSelectedItemDecription() {
+        return _spawnID != -1 ? shopItems[_spawnID].description : "Select an item";
     }
 
     private void DetectSpawnPoint()
@@ -53,13 +63,13 @@ public class PlayerInput : MonoBehaviour
         if (ground.GetColliderType(cellPosDefault) 
             != UnityEngine.Tilemaps.Tile.ColliderType.Sprite) return;
 
-        var turretCost = turretsCost[_spawnID];
+        var turretCost = shopItems[_spawnID].cost;
         if (CurrencyManager.Instance.CanSpendCurrency(turretCost) && CanPlaceTurret(cellPosCentered))
         {
-            GameObject g = Instantiate(turretsPrefabs[_spawnID], cellPosCentered, Quaternion.identity);
+            GameObject g = Instantiate(shopItems[_spawnID].prefab, cellPosCentered, Quaternion.identity);
             if (EnemySpawner.Instance.IsPathAvailable())
             {
-                Instantiate(turretsPrefabs[_spawnID], cellPosCentered, Quaternion.identity);
+                Instantiate(shopItems[_spawnID].prefab, cellPosCentered, Quaternion.identity);
                 CurrencyManager.Instance.SpendCurrency(turretCost);
                 EnemySpawner.Instance.RecalculatePaths();
                 DeselectTowers();
@@ -95,10 +105,10 @@ public class PlayerInput : MonoBehaviour
             return;
         }
 
-        bool canPlace = CanPlaceTurret(cellPosCentered) && CurrencyManager.Instance.CanSpendCurrency(turretsCost[_spawnID]);
+        bool canPlace = CanPlaceTurret(cellPosCentered) && CurrencyManager.Instance.CanSpendCurrency(shopItems[_spawnID].cost);
         _currentTurretPreview.transform.position = cellPosCentered;
         _currentTurretRangePreview.transform.position = _currentTurretPreview.transform.position;
-        var range = turretsPrefabs[_spawnID].GetComponent<Turret>().GetRange() * 2;
+        var range = shopItems[_spawnID].prefab.GetComponent<Turret>().GetRange() * 2;
         _currentTurretRangePreview.transform.localScale = new Vector3(range, range, 1f);
         _currentTurretPreview.SetActive(true);
         _currentTurretRangePreview.SetActive(true);
@@ -131,14 +141,14 @@ public class PlayerInput : MonoBehaviour
     {
         DeselectTowers();
         _spawnID = id;
-        turretsUI[id].color = new Color(1f, 1f, 1f);
+        shopItems[id].image.color = new Color(1f, 1f, 1f);
     }
 
     private void DeselectTowers()
     {
-        foreach (var t in turretsUI)
+        foreach (var item in shopItems)
         {
-            t.color = new Color(0.4f, 0.4f, 0.4f, 0.6f);
+            item.image.color = new Color(0.4f, 0.4f, 0.4f, 0.6f);
         }
         _spawnID = -1;
 
