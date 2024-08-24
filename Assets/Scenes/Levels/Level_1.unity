@@ -1072,9 +1072,8 @@ MonoBehaviour:
   - {fileID: 872887317}
   tilemap: {fileID: 1340129216}
   spawnInterval: 1
-  maxWaveCycles: 3
+  maxWaveCycles: 1
   startWaveButton: {fileID: 1924619053}
-  waveUI: {fileID: 1099083453}
 --- !u!1 &360115802
 GameObject:
   m_ObjectHideFlags: 0
@@ -3708,7 +3707,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startingLife: 20
-  gameOverScreen: {fileID: 0}
 --- !u!114 &964998660
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -32,7 +32,7 @@ public class PlayerInput : MonoBehaviour
         {
             Instance = this;
             DeselectTowers();
-            DontDestroyOnLoad(gameObject);
+            // DontDestroyOnLoad(gameObject);
         }
     }
 

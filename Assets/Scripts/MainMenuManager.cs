@@ -9,17 +9,17 @@ public class MainMenuManager: MonoBehaviour
     {
         Time.timeScale = 1;
         
-        if (BaseLife.Instance is not null)
-        {
-            BaseLife.Instance.Restore();
-        }
+        // if (BaseLife.Instance is not null)
+        // {
+        //     BaseLife.Instance.Restore();
+        // }
         
-        if (EnemySpawner.Instance is not null)
-        {
-            EnemySpawner.Instance.StopAllCoroutines();
-            Destroy(EnemySpawner.Instance.gameObject);
-            EnemySpawner.Instance.Restore();
-        }
+        // if (EnemySpawner.Instance is not null)
+        // {
+        //     EnemySpawner.Instance.StopAllCoroutines();
+        //     Destroy(EnemySpawner.Instance.gameObject);
+        //     EnemySpawner.Instance.Restore();
+        // }
         
         SceneManager.LoadScene(levelSceneBaseName+level);
     }
