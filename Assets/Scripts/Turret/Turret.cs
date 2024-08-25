@@ -1,8 +1,5 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
 
 public abstract class Turret : MonoBehaviour
 {
@@ -10,6 +7,7 @@ public abstract class Turret : MonoBehaviour
     [SerializeField] protected LayerMask enemyMask;
     [SerializeField] protected Transform firingPoint;
     [SerializeField] private Transform turretRotationPoint;
+    [SerializeField] private GameObject removeUI;
 
     private string name;
     protected float range;
@@ -50,7 +48,27 @@ public abstract class Turret : MonoBehaviour
    
         _fireCountdown -= Time.deltaTime;
     }
-   
+
+    private void OnMouseDown()
+    {
+        if (!removeUI.active)
+        {
+            removeUI.SetActive(true);
+            return;
+        }
+    
+        Vector3Int cellPosition = PlayerInput.Instance.ground.WorldToCell(transform.position);
+        PlayerInput.Instance.ground.SetColliderType(cellPosition, UnityEngine.Tilemaps.Tile.ColliderType.Sprite);
+
+        Destroy(gameObject);
+        EnemySpawner.Instance.RecalculatePaths();
+    }
+
+    private void OnMouseExit()
+    {
+        if(removeUI.active) removeUI.SetActive(false);
+    }
+
     private void FindTarget() {
         Collider2D[] colliders = new Collider2D[30];
         int size = Physics2D.OverlapCircleNonAlloc(transform.position, GetRange(), colliders, enemyMask);

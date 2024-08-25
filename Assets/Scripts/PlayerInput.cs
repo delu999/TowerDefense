@@ -10,7 +10,7 @@ public class PlayerInput : MonoBehaviour
     [SerializeField] private LayerMask colliderMasks;
     [SerializeField] private List<ShopItem> shopItems;
     [SerializeField] private GameObject invisibleTurretPrefab;
-    [SerializeField] private Tilemap ground;
+    [SerializeField] public Tilemap ground;
     private int _spawnID = -1;
     
     [SerializeField] private Color previewColorCanPlace = new(0, 1, 0, 0.25f); // Verde semitrasparente
@@ -98,7 +98,7 @@ public class PlayerInput : MonoBehaviour
             return;
         }
         
-        if (_currentTurretPreview is null)
+        if (_currentTurretPreview is null || _currentTurretRangePreview is null)
         {
             _currentTurretPreview = Instantiate(turretPreviewPrefab, Vector3.zero, Quaternion.identity);
             _currentTurretRangePreview = Instantiate(turretRangePreviewPrefab, Vector3.zero, Quaternion.identity);
