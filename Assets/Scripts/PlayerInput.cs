@@ -1,9 +1,6 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
-using UnityEngine.UI;
-using TMPro;
 
 public class PlayerInput : MonoBehaviour
 {
@@ -137,9 +134,17 @@ public class PlayerInput : MonoBehaviour
     {
         return Physics2D.OverlapCircle(position, 0.25f, colliderMasks) is null;
     }
+    
     public void SelectTower(int id)
     {
+        if(_spawnID == id)
+        {
+            DeselectTowers();
+            return;
+        }
+        
         DeselectTowers();
+        
         _spawnID = id;
         shopItems[id].image.color = new Color(1f, 1f, 1f);
     }
