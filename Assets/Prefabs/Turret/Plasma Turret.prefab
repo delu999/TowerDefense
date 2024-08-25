@@ -104,8 +104,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 749769793
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 5958822f4583940f4bf1ea2bfd545d73, type: 3}
   m_Color: {r: 0.13333334, g: 0.6392157, b: 0.7647059, a: 1}
@@ -692,3 +692,4 @@ MonoBehaviour:
   firingPoint: {fileID: 7277197611365634067}
   turretRotationPoint: {fileID: 653856609257066120}
   removeUI: {fileID: 6372672629245229995}
+  rangePrefab: {fileID: 4779790481646681720, guid: b708f84e5339841ae9496e0147575476, type: 3}

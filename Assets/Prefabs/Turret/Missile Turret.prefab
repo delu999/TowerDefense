@@ -608,6 +608,7 @@ MonoBehaviour:
   firingPoint: {fileID: 7277197611365634067}
   turretRotationPoint: {fileID: 653856609257066120}
   removeUI: {fileID: 5916973400669882060}
+  rangePrefab: {fileID: 4779790481646681720, guid: b708f84e5339841ae9496e0147575476, type: 3}
 --- !u!1 &7654077254653837168
 GameObject:
   m_ObjectHideFlags: 0

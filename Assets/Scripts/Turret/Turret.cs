@@ -8,7 +8,8 @@ public abstract class Turret : MonoBehaviour
     [SerializeField] protected Transform firingPoint;
     [SerializeField] private Transform turretRotationPoint;
     [SerializeField] private GameObject removeUI;
-
+    [SerializeField] private GameObject rangePrefab;
+    
     private string name;
     protected float range;
     protected float fireRate;
@@ -17,6 +18,7 @@ public abstract class Turret : MonoBehaviour
     private float rotationSpeed = 400f;
     protected float _fireCountdown;
     protected Enemy _targetEnemy;
+    private GameObject _rangeGameObject;
     
     private void Start()
     {
@@ -54,12 +56,18 @@ public abstract class Turret : MonoBehaviour
         if (!removeUI.active)
         {
             removeUI.SetActive(true);
+            if(rangePrefab)
+            {
+                _rangeGameObject = Instantiate(rangePrefab, transform.position, Quaternion.identity);
+                _rangeGameObject.transform.localScale = new Vector3(GetRange() * 2, GetRange() * 2, 1f);
+            }
             return;
         }
     
         Vector3Int cellPosition = PlayerInput.Instance.ground.WorldToCell(transform.position);
         PlayerInput.Instance.ground.SetColliderType(cellPosition, UnityEngine.Tilemaps.Tile.ColliderType.Sprite);
 
+        Destroy(_rangeGameObject);
         Destroy(gameObject);
         EnemySpawner.Instance.RecalculatePaths();
     }
@@ -67,6 +75,11 @@ public abstract class Turret : MonoBehaviour
     private void OnMouseExit()
     {
         if(removeUI.active) removeUI.SetActive(false);
+        if(_rangeGameObject)
+        {
+            Destroy(_rangeGameObject);
+            _rangeGameObject = null;
+        }
     }
 
     private void FindTarget() {
