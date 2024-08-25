@@ -2485,7 +2485,7 @@ MonoBehaviour:
     cost: 20
     description: Slow firing turret that damages an area on the ground
   - prefab: {fileID: 6772062096461808707, guid: 79624f3be947847a4b59d758df50b949, type: 3}
-    image: {fileID: 1715480599}
+    image: {fileID: 1122941356}
     cost: 50
     description: Turret that fires 4 missiles at a time
   - prefab: {fileID: 6772062096461808707, guid: a43116c71c514491db3bb4cbf86dc722, type: 3}

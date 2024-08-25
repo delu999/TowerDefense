@@ -154,4 +154,9 @@ public class PlayerInput : MonoBehaviour
 
         HideTurretPreview();
     }
+
+    public void Restore()
+    {
+        Instance = null;
+    }
 }

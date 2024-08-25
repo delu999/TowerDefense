@@ -39,4 +39,8 @@ public class CurrencyManager : MonoBehaviour
             Balance -= amount;
         }
     }
+
+    public void Restore() {
+        Instance = null;
+    }
 }

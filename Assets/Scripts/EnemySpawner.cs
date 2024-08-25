@@ -80,7 +80,7 @@ public class EnemySpawner : MonoBehaviour
             if (isBoss) _currentDifficulty *= 2;
             yield return new WaitForSeconds(10f);
         }
-        startWaveButton.interactable = true;
+        // startWaveButton.interactable = true;
     }
 
     private IEnumerator SpawnWave(GameObject enemy, int quantity, float difficulty)
