@@ -1,4 +1,6 @@
+using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -16,6 +18,9 @@ public class PlayerInput : MonoBehaviour
     [SerializeField] private GameObject turretRangePreviewPrefab;
     private GameObject _currentTurretPreview;
     private GameObject _currentTurretRangePreview;
+    
+    [SerializeField] private TextMeshProUGUI alertTextUI;
+    [SerializeField] private GameObject alertPanel;
 
     public static PlayerInput Instance { get; private set; }
     
@@ -58,7 +63,11 @@ public class PlayerInput : MonoBehaviour
 
         // Do not allow to put turret on spawn, base and decorations
         if (ground.GetColliderType(cellPosDefault) 
-            != UnityEngine.Tilemaps.Tile.ColliderType.Sprite) return;
+            != UnityEngine.Tilemaps.Tile.ColliderType.Sprite)
+        {
+            DisplayAlert("Can't place here!");
+            return;
+        }
 
         var turretCost = shopItems[_spawnID].cost;
         if (CurrencyManager.Instance.CanSpendCurrency(turretCost) && CanPlaceTurret(cellPosCentered))
@@ -72,12 +81,17 @@ public class PlayerInput : MonoBehaviour
                 DeselectTowers();
                 ground.SetColliderType(cellPosDefault, UnityEngine.Tilemaps.Tile.ColliderType.None);
             }
+            else
+            {
+                DisplayAlert("Can't place turret, enemies might be stuck!");
+            }
             Destroy(g);
             DeselectTowers();
         }
         else
         {
-            Debug.Log("NO");
+            if(!CurrencyManager.Instance.CanSpendCurrency(turretCost)) DisplayAlert("Can't afford this turret!");
+            else DisplayAlert("Can't place here!");
         }
     }
     
@@ -158,6 +172,19 @@ public class PlayerInput : MonoBehaviour
         _spawnID = -1;
 
         HideTurretPreview();
+    }
+
+    private void DisplayAlert(string alert)
+    {
+        alertTextUI.text = alert;
+        alertPanel.SetActive(true);
+        StartCoroutine(HideAlert());
+    }
+
+    private IEnumerator HideAlert()
+    {
+        yield return new WaitForSeconds(2f);
+        alertPanel.SetActive(false);
     }
 
     public void Restore()
