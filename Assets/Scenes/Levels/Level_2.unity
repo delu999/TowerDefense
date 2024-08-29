@@ -841,7 +841,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23ca400303a632bc58418093c452d216, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waveConfig: {fileID: 11400000, guid: b4ff1d728efc7b660b7599773d14e3ed, type: 2}
+  waveConfig: {fileID: 11400000, guid: 7f6ae15213468496883e2c483effcd27, type: 2}
   turretMasks:
     serializedVersion: 2
     m_Bits: 64

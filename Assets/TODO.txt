@@ -35,3 +35,5 @@
 - fixare namespacing di turrets (Vedere suggerimento di jetbrains)
 
 - remove debug.logs
+
+- fare immagine unica per la freeze turret
