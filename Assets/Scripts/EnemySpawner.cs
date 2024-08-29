@@ -1,11 +1,9 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using Random = UnityEngine.Random;
 using UnityEngine.UI;
-using TMPro;
 using UnityEngine.SceneManagement;
 
 public class EnemySpawner : MonoBehaviour
@@ -19,7 +17,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private int maxWaveCycles = 3;
     private readonly List<Enemy> _enemies = new ();
     private Pathfinding _pathfinding;
-    private float countdownUntilgameEnd = 2f;
+    private float _countdownUntilgameEnd = 2f;
 
     public Button startWaveButton;
     public int CurrentWave { get; private set; }
@@ -48,7 +46,7 @@ public class EnemySpawner : MonoBehaviour
 
     private void Update()
     {
-        if (countdownUntilgameEnd <= 0f)
+        if (_countdownUntilgameEnd <= 0f)
         {
             Time.timeScale = 0;
 
@@ -58,7 +56,7 @@ public class EnemySpawner : MonoBehaviour
         }
         if (CurrentWave >= GetTotalWaves() && _enemies.Count == 0)
         {
-            countdownUntilgameEnd -= Time.deltaTime;
+            _countdownUntilgameEnd -= Time.deltaTime;
         }
     }
 
@@ -71,37 +69,30 @@ public class EnemySpawner : MonoBehaviour
     private IEnumerator SpawnEnemies()
     {
         startWaveButton.interactable = false;
-        float _currentDifficulty = 1f;
+        float currentDifficulty = 1f;
         for (int i = 0; i < GetTotalWaves(); i++)
         {
             CurrentWave++;
             bool isBoss = i % prefabs.Count == prefabs.Count - 1;
-            StartCoroutine(SpawnWave(prefabs[i%prefabs.Count], isBoss ? 1 : 10, _currentDifficulty));
-            if (isBoss) _currentDifficulty *= 2;
+            StartCoroutine(SpawnWave(prefabs[i%prefabs.Count], isBoss ? 1 : 10, currentDifficulty));
             yield return new WaitForSeconds(spawnInterval);
         }
         // startWaveButton.interactable = true;
     }
 
-    private IEnumerator SpawnWave(GameObject enemy, int quantity, float difficulty)
+    private IEnumerator SpawnWave(GameObject enemyPrefab, int quantity, float difficulty)
     {
         for (int j = 0; j < quantity; j++)
         {
-            SpawnEnemy(enemy, difficulty);
+            int randomSpawnPointID = Random.Range(0, spawnPoints.Count);
+            var spawnedEnemy = Instantiate(enemyPrefab, spawnPoints[randomSpawnPointID].position, Quaternion.identity);
+            var enemy = spawnedEnemy.GetComponent<Enemy>();
+            enemy.SetDifficulty(difficulty);
+            _enemies.Add(enemy);
+            enemy.Init(spawnPoints[randomSpawnPointID].position, basePoints[randomSpawnPointID].position, tilemap);
             yield return new WaitForSeconds(0.5f);
         }
     }
-    
-    private void SpawnEnemy(GameObject enemyToSpawn, float difficulty) {
-        int randomSpawnPointID = Random.Range(0, spawnPoints.Count);
-
-        GameObject spawnedEnemy = Instantiate(enemyToSpawn, spawnPoints[randomSpawnPointID].position, Quaternion.identity);
-        Enemy enemy = spawnedEnemy.GetComponent<Enemy>();
-        enemy.SetDifficulty(difficulty);
-        _enemies.Add(enemy);
-        enemy.Init(spawnPoints[randomSpawnPointID].position, basePoints[randomSpawnPointID].position, tilemap);
-    }
-    
     
     public void RecalculatePaths()
     {
