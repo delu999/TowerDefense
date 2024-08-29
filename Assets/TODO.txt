@@ -6,3 +6,8 @@
 
 - aggiustare l'errore di battitura flyng enemy e layer 
 
+- ho cambiato e messo cosi:
+  plasma turret (terra/aria)
+  missile turret (solo terra)
+  dca (solo aria) 
+  pero forse ha poco senso che l'immagine di missile turret e dca sia la stessa (entrambi hanno un razzo)
