@@ -1,3 +1,6 @@
+
+--- importante (ho messo il costo delle dca a 30 ma il prezzo non è cambiato)
+
 - bilanciare potenza torrette e vita dei nemici 
 
 - rimuovere icona per wave, e mettere testo in questo modo (Level: numero oppure Wave: numero)
@@ -20,3 +23,5 @@
 - fixare i warning di unity
 
 - fixare namespacing di turrets (Vedere suggerimento di jetbrains)
+
+- remove debug.logs
