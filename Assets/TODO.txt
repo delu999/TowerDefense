@@ -1,6 +1,8 @@
 
 --- importante (ho messo il costo delle dca a 30 ma il prezzo non è cambiato)
 
+--- importante manca un bottone per tornare al menu, mentre si è in gioco (bottone quit)
+
 - bilanciare potenza torrette e vita dei nemici 
 
 - rimuovere icona per wave, e mettere testo in questo modo (Level: numero oppure Wave: numero)
