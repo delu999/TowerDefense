@@ -3,11 +3,9 @@
 
 -- refactoring di turret
 
--- abbassare prezzo freeze turret
-
 -- per ora il livello 2 ha la stessa wave config del livello 1
 
-- bilanciare potenza torrette e vita dei nemici 
+- bilanciare potenza torrette e vita dei nemici + costi torrette
 
 - rimuovere icona per wave, e mettere testo in questo modo (Level: numero oppure Wave: numero)
 

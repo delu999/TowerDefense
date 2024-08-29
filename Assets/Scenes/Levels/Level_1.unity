@@ -2738,7 +2738,7 @@ MonoBehaviour:
     description: Turret that fires 4 missiles at a time
   - prefab: {fileID: 6772062096461808707, guid: a43116c71c514491db3bb4cbf86dc722, type: 3}
     image: {fileID: 1715480599}
-    cost: 50
+    cost: 40
     description: Damages and freezes enemies to slow them down
   invisibleTurretPrefab: {fileID: 1524516003829438954, guid: 792295eb0b77544eda2832078b5f8f27, type: 3}
   ground: {fileID: 1340129216}
@@ -5192,7 +5192,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 50
+  m_text: 40
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
