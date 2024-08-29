@@ -1,9 +1,8 @@
 
-- finire ripristino game over
 
-- migliorare menu di avvio
+- bilanciare potenza torrette e vita dei nemici 
 
-- bilanciare potenza torrette e vita dei nemici (rendere decisamente più difficile il gioco e in qualche modo rendera la diffcioltà incrementale, al momento è troppo facile)
+- rimuovere icona per wave, e mettere testo in questo modo (Level: numero oppure Wave: numero)
 
 CODICE:
 
