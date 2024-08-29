@@ -54,7 +54,7 @@ public class EnemySpawner : MonoBehaviour
 
             BaseLife.Instance?.Restore();
 
-            SceneManager.LoadScene("GameEndScene");
+            SceneManager.LoadScene("VictoryScene");
         }
         if (CurrentWave >= GetTotalWaves() && _enemies.Count == 0)
         {
