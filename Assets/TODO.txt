@@ -1,6 +1,4 @@
 
---- importante manca un bottone per tornare al menu, mentre si è in gioco (bottone quit)
-
 -- refactoring di enemy
 
 -- refactoring di turret
@@ -22,11 +20,6 @@
   missile turret (solo terra, ampio raggio)
   dca (solo aria) 
   pero forse ha poco senso che l'immagine di missile turret e dca sia la stessa (entrambi hanno un razzo)
-  
-- nascondere il bottone, Start wave
-
-- mostrare il tempo tra una wave e l'altra (ho allungato e messo 20 secondi tra wave, altrimenti
-    diventa ingiocabile)
 
 - fixare i warning di unity
 

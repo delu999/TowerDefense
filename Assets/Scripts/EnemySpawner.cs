@@ -16,9 +16,11 @@ public class EnemySpawner : MonoBehaviour
     private readonly List<Enemy> _enemies = new ();
     private Pathfinding _pathfinding;
     private float countdownUntilgameEnd = 2f;
+    private bool isSpawning = false;
 
     public Button startWaveButton;
     public int CurrentWave { get; private set; }
+    public float CountdownUntilNextWave { get; private set; }
 
     public static EnemySpawner Instance { get; private set; }
 
@@ -37,6 +39,7 @@ public class EnemySpawner : MonoBehaviour
 
     private void Start()
     {
+        CountdownUntilNextWave = 0f;
         _pathfinding = new Pathfinding(turretMasks, tilemap);
         startWaveButton.onClick.AddListener(StartSpawning);
     }
@@ -45,36 +48,53 @@ public class EnemySpawner : MonoBehaviour
     {
         if (countdownUntilgameEnd <= 0f)
         {
+            isSpawning = false;
             Time.timeScale = 0;
             BaseLife.Instance?.Restore();
             SceneManager.LoadScene("VictoryScene");
+            return;
         }
 
         if (CurrentWave >= waveConfig.waves.Count && _enemies.Count == 0)
         {
             countdownUntilgameEnd -= Time.deltaTime;
         }
+
+        // Spawn Waves
+        if (!isSpawning) return;
+        if (CountdownUntilNextWave > 0) {
+            CountdownUntilNextWave -= Time.deltaTime;
+            return;
+        }
+
+        var wave = waveConfig.waves[CurrentWave];
+        CurrentWave++;
+        foreach (var enemyInfo in wave.enemies)
+        {
+            StartCoroutine(SpawnWave(enemyInfo));
+        }
+        CountdownUntilNextWave = spawnInterval;
     }
 
     public void StartSpawning()
     {
         CurrentWave = 0;
-        startWaveButton.interactable = false;
-        StartCoroutine(SpawnWaves());
+        startWaveButton.gameObject.SetActive(false);
+        isSpawning = true;
     }
 
-    private IEnumerator SpawnWaves()
-    {
-        foreach (var wave in waveConfig.waves)
-        {
-            CurrentWave++;
-            foreach (var enemyInfo in wave.enemies)
-            {
-                yield return StartCoroutine(SpawnWave(enemyInfo));
-            }
-            yield return new WaitForSeconds(spawnInterval);
-        }
-    }
+    // private IEnumerator SpawnWaves()
+    // {
+    //     foreach (var wave in waveConfig.waves)
+    //     {
+    //         CurrentWave++;
+    //         foreach (var enemyInfo in wave.enemies)
+    //         {
+    //             yield return StartCoroutine(SpawnWave(enemyInfo));
+    //         }
+    //         yield return new WaitForSeconds(spawnInterval);
+    //     }
+    // }
 
 
     private IEnumerator SpawnWave(WaveConfig.EnemySpawnInfo enemyInfo)
