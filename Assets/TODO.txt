@@ -8,11 +8,11 @@
 
 - ho cambiato e messo cosi:
   plasma turret (terra/aria)
-  missile turret (solo terra)
+  missile turret (solo terra, ampio raggio)
   dca (solo aria) 
   pero forse ha poco senso che l'immagine di missile turret e dca sia la stessa (entrambi hanno un razzo)
   
-- nascondere il bottone, start wave
+- nascondere il bottone, Start wave
 
 - mostrare il tempo tra una wave e l'altra (ho allungato e messo 20 secondi tra wave, altrimenti
     diventa ingiocabile)
