@@ -34,10 +34,10 @@ MonoBehaviour:
   - enemies:
     - enemyPrefab: {fileID: 1655209499408274660, guid: 90fc838bec66c4c54983eec600b5fb5b, type: 3}
       quantity: 20
-      difficulty: 5
+      difficulty: 4
     - enemyPrefab: {fileID: 1655209499408274660, guid: ed386d334b00bcc3285138fd8919ad91, type: 3}
       quantity: 20
-      difficulty: 5
+      difficulty: 4
   - enemies:
     - enemyPrefab: {fileID: 1655209499408274660, guid: 5868680636dc141d7a26860ba067cc1b, type: 3}
       quantity: 20
