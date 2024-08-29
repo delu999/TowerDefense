@@ -3,8 +3,6 @@
 
 -- refactoring di turret
 
--- per ora il livello 2 ha la stessa wave config del livello 1
-
 - bilanciare potenza torrette e vita dei nemici + costi torrette
 
 - mostrare messaggio (ad esempio "Stuck") quando si mettete una torretta in un posto che blocca il path
