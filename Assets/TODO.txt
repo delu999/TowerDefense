@@ -1,9 +1,5 @@
-
-
 - bilanciare potenza torrette e vita dei nemici 
 
 - rimuovere icona per wave, e mettere testo in questo modo (Level: numero oppure Wave: numero)
 
-CODICE:
-
-- Refactoring generale
+- mostrare messaggio (ad esempio "Stuck") quando si mettete una torretta in un posto che blocca il path
