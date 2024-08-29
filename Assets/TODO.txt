@@ -16,3 +16,7 @@
 
 - mostrare il tempo tra una wave e l'altra (ho allungato e messo 20 secondi tra wave, altrimenti
     diventa ingiocabile)
+
+- fixare i warning di unity
+
+- fixare namespacing di turrets (Vedere suggerimento di jetbrains)
