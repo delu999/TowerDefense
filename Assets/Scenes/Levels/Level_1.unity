@@ -1050,13 +1050,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23ca400303a632bc58418093c452d216, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabs:
-  - {fileID: 1655209499408274660, guid: ed386d334b00bcc3285138fd8919ad91, type: 3}
-  - {fileID: 1655209499408274660, guid: 5868680636dc141d7a26860ba067cc1b, type: 3}
-  - {fileID: 1655209499408274660, guid: 6e5bb20f13baf43ff9b8b2ca82117e4a, type: 3}
-  - {fileID: 1655209499408274660, guid: 90fc838bec66c4c54983eec600b5fb5b, type: 3}
-  - {fileID: 1655209499408274660, guid: 2ead0eca6d73b46c1b5edf590f615bc9, type: 3}
-  - {fileID: 1655209499408274660, guid: 7bcc080c73d994d32ba89db4c3ac87db, type: 3}
+  waveConfig: {fileID: 11400000, guid: b4ff1d728efc7b660b7599773d14e3ed, type: 2}
   turretMasks:
     serializedVersion: 2
     m_Bits: 64
@@ -1072,7 +1066,6 @@ MonoBehaviour:
   - {fileID: 872887317}
   tilemap: {fileID: 1340129216}
   spawnInterval: 20
-  maxWaveCycles: 3
   startWaveButton: {fileID: 1924619053}
 --- !u!1 &360115802
 GameObject:

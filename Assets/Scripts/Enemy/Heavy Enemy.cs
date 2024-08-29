@@ -10,8 +10,7 @@ public class HeavyEnemy : Enemy
 
     public override void Init(Vector2 spawnPosition, Vector2 targetPosition, Tilemap ground)
     {
-        maxHealth = 80;
-        reward = 2;
+        maxHealth = 100;
         base.Init(spawnPosition, targetPosition, ground);
     }
 }

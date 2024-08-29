@@ -2,31 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
-using Random = UnityEngine.Random;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class EnemySpawner : MonoBehaviour
 {
-    [SerializeField] private List<GameObject> prefabs;
+    [SerializeField] private WaveConfig waveConfig;
     [SerializeField] private LayerMask turretMasks;
     [SerializeField] private List<Transform> spawnPoints;
     [SerializeField] private List<Transform> basePoints;
     [SerializeField] private Tilemap tilemap;
-    [SerializeField] private float spawnInterval = 30f;
-    [SerializeField] private int maxWaveCycles = 3;
+    [SerializeField] private float spawnInterval = 20f;
     private readonly List<Enemy> _enemies = new ();
     private Pathfinding _pathfinding;
-    private float _countdownUntilgameEnd = 2f;
+    private float countdownUntilgameEnd = 2f;
 
     public Button startWaveButton;
     public int CurrentWave { get; private set; }
-    
+
     public static EnemySpawner Instance { get; private set; }
 
     private void Awake()
     {
-        if (Instance is not null && Instance != this)
+        if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
         }
@@ -34,7 +32,6 @@ public class EnemySpawner : MonoBehaviour
         {
             CurrentWave = 0;
             Instance = this;
-            // DontDestroyOnLoad(gameObject);
         }
     }
 
@@ -46,51 +43,60 @@ public class EnemySpawner : MonoBehaviour
 
     private void Update()
     {
-        if (_countdownUntilgameEnd <= 0f)
+        if (countdownUntilgameEnd <= 0f)
         {
             Time.timeScale = 0;
             BaseLife.Instance?.Restore();
             SceneManager.LoadScene("VictoryScene");
         }
-        if (CurrentWave >= GetTotalWaves() && _enemies.Count == 0)
+
+        if (CurrentWave >= waveConfig.waves.Count && _enemies.Count == 0)
         {
-            _countdownUntilgameEnd -= Time.deltaTime;
+            countdownUntilgameEnd -= Time.deltaTime;
         }
     }
 
-    private void StartSpawning()
+    public void StartSpawning()
     {
         CurrentWave = 0;
-        StartCoroutine(SpawnEnemies());
-    }
-    
-    private IEnumerator SpawnEnemies()
-    {
         startWaveButton.interactable = false;
-        float currentDifficulty = 1f;
-        for (int i = 0; i < GetTotalWaves(); i++)
+        StartCoroutine(SpawnWaves());
+    }
+
+    private IEnumerator SpawnWaves()
+    {
+        foreach (var wave in waveConfig.waves)
         {
             CurrentWave++;
-            bool isBoss = i % prefabs.Count == prefabs.Count - 1;
-            StartCoroutine(SpawnWave(prefabs[i%prefabs.Count], isBoss ? 1 : 10, currentDifficulty));
+            foreach (var enemyInfo in wave.enemies)
+            {
+                yield return StartCoroutine(SpawnWave(enemyInfo));
+            }
             yield return new WaitForSeconds(spawnInterval);
         }
     }
 
-    private IEnumerator SpawnWave(GameObject enemyPrefab, int quantity, float difficulty)
+
+    private IEnumerator SpawnWave(WaveConfig.EnemySpawnInfo enemyInfo)
     {
-        for (int i = 0; i < quantity; i++)
+        for (int i = 0; i < enemyInfo.quantity; i++)
         {
-            int randomSpawnPointID = Random.Range(0, spawnPoints.Count);
-            var spawnedEnemy = Instantiate(enemyPrefab, spawnPoints[randomSpawnPointID].position, Quaternion.identity);
-            var enemy = spawnedEnemy.GetComponent<Enemy>();
-            enemy.SetDifficulty(difficulty);
-            _enemies.Add(enemy);
-            enemy.Init(spawnPoints[randomSpawnPointID].position, basePoints[randomSpawnPointID].position, tilemap);
-            yield return new WaitForSeconds(0.5f);
+            SpawnEnemy(enemyInfo.enemyPrefab, enemyInfo.difficulty);
+            yield return new WaitForSeconds(0.05f); // Delay between each enemy spawn within the wave
         }
     }
-    
+
+
+    private void SpawnEnemy(GameObject enemyPrefab, float difficulty)
+    {
+        int randomSpawnPointID = Random.Range(0, spawnPoints.Count);
+        GameObject spawnedEnemy = Instantiate(enemyPrefab, spawnPoints[randomSpawnPointID].position, Quaternion.identity);
+        Enemy enemy = spawnedEnemy.GetComponent<Enemy>();
+        enemy.SetDifficulty(difficulty);
+        _enemies.Add(enemy);
+        enemy.Init(spawnPoints[randomSpawnPointID].position, basePoints[randomSpawnPointID].position, tilemap);
+    }
+
     public void RecalculatePaths()
     {
         foreach (var enemy in _enemies)
@@ -98,22 +104,17 @@ public class EnemySpawner : MonoBehaviour
             enemy?.RecalculatePath();
         }
     }
-    
+
     public bool IsPathAvailable()
     {
-        return _pathfinding.FindPath(spawnPoints[0].position, basePoints[0].position) is not null;
+        return _pathfinding.FindPath(spawnPoints[0].position, basePoints[0].position) != null;
     }
-    
+
     public void RemoveEnemy(Enemy enemy)
     {
         _enemies.Remove(enemy);
     }
 
-    private int GetTotalWaves()
-    {
-        return prefabs.Count * maxWaveCycles;
-    }
-    
     public void Restore()
     {
         Instance = null;

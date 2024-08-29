@@ -14,7 +14,7 @@ public class Enemy : MonoBehaviour
     private float moveSpeed = 1f;
     private float moveSpeedScalingFactor = 1f;
     protected float maxHealth = 20;
-    protected int reward = 2;
+    protected int reward = 1;
     protected float difficulty;
 
     private Pathfinding _pathfinding;

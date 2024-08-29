@@ -6,7 +6,7 @@ public class BossEnemy : Enemy
     public override void Init(Vector2 spawnPosition, Vector2 targetPosition, Tilemap ground)
     {
         maxHealth = 2000;
-        reward = 20;
+        reward = 10;
         base.Init(spawnPosition, targetPosition, ground);
     }
 
