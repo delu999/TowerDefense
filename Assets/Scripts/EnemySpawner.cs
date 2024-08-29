@@ -49,9 +49,7 @@ public class EnemySpawner : MonoBehaviour
         if (_countdownUntilgameEnd <= 0f)
         {
             Time.timeScale = 0;
-
             BaseLife.Instance?.Restore();
-
             SceneManager.LoadScene("VictoryScene");
         }
         if (CurrentWave >= GetTotalWaves() && _enemies.Count == 0)
@@ -60,7 +58,7 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
-    public void StartSpawning()
+    private void StartSpawning()
     {
         CurrentWave = 0;
         StartCoroutine(SpawnEnemies());
@@ -77,12 +75,11 @@ public class EnemySpawner : MonoBehaviour
             StartCoroutine(SpawnWave(prefabs[i%prefabs.Count], isBoss ? 1 : 10, currentDifficulty));
             yield return new WaitForSeconds(spawnInterval);
         }
-        // startWaveButton.interactable = true;
     }
 
     private IEnumerator SpawnWave(GameObject enemyPrefab, int quantity, float difficulty)
     {
-        for (int j = 0; j < quantity; j++)
+        for (int i = 0; i < quantity; i++)
         {
             int randomSpawnPointID = Random.Range(0, spawnPoints.Count);
             var spawnedEnemy = Instantiate(enemyPrefab, spawnPoints[randomSpawnPointID].position, Quaternion.identity);
