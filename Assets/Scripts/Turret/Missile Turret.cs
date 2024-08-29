@@ -8,7 +8,7 @@ public class MissileTurret : Turret
     {
         name = "Missile Turret";
         cost = 20;
-        range = 6f;
+        range = 10f;
         fireRate = 2f;
         damage = 8;
     }

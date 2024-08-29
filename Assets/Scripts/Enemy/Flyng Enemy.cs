@@ -8,7 +8,7 @@ public class FlyingEnemy : Enemy
     public override void Init(Vector2 spawnPosition, Vector2 targetPosition, Tilemap ground)
     {
         maxHealth = 50;
-        reward = 5;
+        reward = 3;
         base.Init(spawnPosition, targetPosition, ground);
     }
     
