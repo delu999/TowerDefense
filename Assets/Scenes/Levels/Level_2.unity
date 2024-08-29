@@ -862,7 +862,7 @@ MonoBehaviour:
   - {fileID: 360115803}
   - {fileID: 872887317}
   tilemap: {fileID: 1340129216}
-  spawnInterval: 1
+  spawnInterval: 30
   maxWaveCycles: 3
   startWaveButton: {fileID: 1924619053}
 --- !u!1 &360115802

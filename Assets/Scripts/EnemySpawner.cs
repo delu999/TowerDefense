@@ -15,7 +15,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private List<Transform> spawnPoints;
     [SerializeField] private List<Transform> basePoints;
     [SerializeField] private Tilemap tilemap;
-    [SerializeField] private float spawnInterval = 2f;
+    [SerializeField] private float spawnInterval = 30f;
     [SerializeField] private int maxWaveCycles = 3;
     private readonly List<Enemy> _enemies = new ();
     private Pathfinding _pathfinding;
@@ -78,7 +78,7 @@ public class EnemySpawner : MonoBehaviour
             bool isBoss = i % prefabs.Count == prefabs.Count - 1;
             StartCoroutine(SpawnWave(prefabs[i%prefabs.Count], isBoss ? 1 : 10, _currentDifficulty));
             if (isBoss) _currentDifficulty *= 2;
-            yield return new WaitForSeconds(10f);
+            yield return new WaitForSeconds(spawnInterval);
         }
         // startWaveButton.interactable = true;
     }

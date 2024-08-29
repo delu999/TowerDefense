@@ -5,7 +5,7 @@ public class PlasmaTurret : Turret
         name = "Plasma Turret";
         cost = 15;
         range = 5f;
-        fireRate = 0.5f; // Fast speed
+        fireRate = 4f; // Fast speed
         damage = 5;
     }
     

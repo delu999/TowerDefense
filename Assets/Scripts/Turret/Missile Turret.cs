@@ -9,7 +9,7 @@ public class MissileTurret : Turret
         name = "Missile Turret";
         cost = 20;
         range = 6f;
-        fireRate = 2f; // Very slow speed
+        fireRate = 2f;
         damage = 8;
     }
     

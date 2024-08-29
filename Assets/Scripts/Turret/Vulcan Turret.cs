@@ -5,7 +5,7 @@ public class VulcanTurret : Turret
         name = "Vulcan Turret";
         cost = 5;
         range = 4f;
-        fireRate = 1f; // Slow speed
+        fireRate = 1f;
         damage = 10;
     }
 

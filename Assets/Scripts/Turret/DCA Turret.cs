@@ -6,7 +6,7 @@ public class DCA : Turret
     protected override void Init()
     {
         name = "Defense Control Artillery";
-        cost = 50;
+        cost = 30;
         range = 4f;
         fireRate = 1f; // Average speed
         damage = 20;
