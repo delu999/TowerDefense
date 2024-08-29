@@ -3,3 +3,6 @@
 - rimuovere icona per wave, e mettere testo in questo modo (Level: numero oppure Wave: numero)
 
 - mostrare messaggio (ad esempio "Stuck") quando si mettete una torretta in un posto che blocca il path
+
+- aggiustare l'errore di battitura flyng enemy e layer 
+
