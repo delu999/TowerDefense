@@ -114,6 +114,24 @@ MonoBehaviour:
   turretMask:
     serializedVersion: 2
     m_Bits: 64
+  damageToBase: 5
+  moveSpeed: 0.75
+  maxHealth: 5000
+  reward: 10
+  enemiseInsideTank:
+    enemies:
+    - enemyPrefab: {fileID: 1655209499408274660, guid: 6e5bb20f13baf43ff9b8b2ca82117e4a, type: 3}
+      quantity: 2
+      difficulty: 2
+    - enemyPrefab: {fileID: 1655209499408274660, guid: 5868680636dc141d7a26860ba067cc1b, type: 3}
+      quantity: 4
+      difficulty: 4
+    - enemyPrefab: {fileID: 1655209499408274660, guid: ed386d334b00bcc3285138fd8919ad91, type: 3}
+      quantity: 4
+      difficulty: 6
+    - enemyPrefab: {fileID: 1655209499408274660, guid: 90fc838bec66c4c54983eec600b5fb5b, type: 3}
+      quantity: 1
+      difficulty: 4
 --- !u!1 &2322648486663484164
 GameObject:
   m_ObjectHideFlags: 0
@@ -185,7 +203,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -348761027
-  m_SortingLayer: 2
+  m_SortingLayer: 5
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 1778dd28fdc8446399e8bf1d2346de87, type: 3}
   m_Color: {r: 0.254717, g: 0.254717, b: 0.254717, a: 1}
@@ -269,7 +287,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -348761027
-  m_SortingLayer: 2
+  m_SortingLayer: 5
   m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 624e194b6cd224e799063e782b7575ab, type: 3}
   m_Color: {r: 0.25490198, g: 0.25490198, b: 0.25490198, a: 1}

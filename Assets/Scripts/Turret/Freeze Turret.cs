@@ -1,54 +1,51 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
-public class FreezeTurret : Turret
+namespace Turret
 {
-    private float _freezeTime;
-    
-    protected override void Init()
+    public class FreezeTurret : Turret
     {
-        name = "Freeze Turret";
-        cost = 50;
-        range = 3f;
-        fireRate = 1.5f; // Slow speed
-        damage = 0.1f;
-        _freezeTime = 1f;
-    }
+        [SerializeField] private float freezeTime;
 
-    private void Update() {
-        _fireCountdown -= Time.deltaTime;
+        private void Update() {
+            if (FireCountdown > 0f)
+            {
+                FireCountdown -= Time.deltaTime;
+                return;
+            }
+            
+            FireCountdown = 1f/FireRate;
+            FreezeEnemies();
+        }
 
-        if (_fireCountdown > 0f) return;
-        
-        FreezeEnemies();
-        _fireCountdown = 1f / fireRate;
-    }
+        private void FreezeEnemies()
+        {
+            RaycastHit2D[] hits = new RaycastHit2D[50];
+            var hitsNumber = Physics2D.CircleCastNonAlloc(transform.position, GetRange(), transform.position, hits, 0f, enemyMask);
 
-    private void FreezeEnemies() {
-        RaycastHit2D[] hits = Physics2D.CircleCastAll(transform.position, GetRange(), (Vector2) transform.position, 0f, enemyMask);
-
-        if (hits.Length > 0) {
-            for(int i = 0; i < hits.Length; i++) {
-                RaycastHit2D hit = hits[i];
-
-                Enemy e = hit.transform.GetComponent<Enemy>();
+            if (hitsNumber <= 0) return;
+            foreach (var hit in hits)
+            {
+                Enemy.Enemy e;
+                try {
+                    e = hit.transform.GetComponent<Enemy.Enemy>();
+                } catch (Exception ex) {
+                    continue;
+                }
+                if (e is null) continue;
                 e.ChangeSpeedFactor(0.5f);
-                _targetEnemy = e;
+                TargetEnemy = e;
                 Shoot();
 
                 StartCoroutine(ResetEnemySpeed(e));
             }
         }
-    }
     
-    private IEnumerator ResetEnemySpeed(Enemy e) {
-        yield return new WaitForSeconds(_freezeTime);
+        private IEnumerator ResetEnemySpeed(Enemy.Enemy e) {
+            yield return new WaitForSeconds(freezeTime);
 
-        e.ChangeSpeedFactor();
-    }
-    
-    public override float GetRange()
-    {
-        return 3f/2;
+            e.ChangeSpeedFactor();
+        }
     }
 }

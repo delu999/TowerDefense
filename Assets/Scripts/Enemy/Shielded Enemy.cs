@@ -1,17 +1,21 @@
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class ShieldedEnemy : Enemy
+namespace Enemy
 {
-    public override void Init(Vector2 spawnPosition, Vector2 targetPosition, Tilemap ground)
+    public class ShieldedEnemy : Enemy
     {
-        maxHealth = 100;
-        base.Init(spawnPosition, targetPosition, ground);
-    }
-
-    public override void TakeDamage(float damage)
-    {
-        //float reducedDamage = Mathf.Max(1, damage / 2);
-        base.TakeDamage(damage);
+        [SerializeField] private float shieldLife;
+        
+        public override void TakeDamage(float damage)
+        {
+            if (shieldLife >= damage)
+            {
+                shieldLife -= Mathf.Max(1, damage * 0.25f);
+                return;
+            }
+            float reducedDamage = Mathf.Max(1, damage * 0.75f);
+            base.TakeDamage(reducedDamage);
+        }
     }
 }

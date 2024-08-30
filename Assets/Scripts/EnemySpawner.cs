@@ -13,7 +13,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private List<Transform> basePoints;
     [SerializeField] private Tilemap tilemap;
     [SerializeField] private float spawnInterval = 20f;
-    private readonly List<Enemy> _enemies = new ();
+    private readonly List<Enemy.Enemy> _enemies = new ();
     private Pathfinding _pathfinding;
     private float countdownUntilgameEnd = 2f;
     private bool isSpawning = false;
@@ -67,6 +67,8 @@ public class EnemySpawner : MonoBehaviour
             return;
         }
 
+        // Wave finished, but there are more enemies spawned al alternative ways
+        if (CurrentWave >= waveConfig.waves.Count) return;
         var wave = waveConfig.waves[CurrentWave];
         CurrentWave++;
         foreach (var enemyInfo in wave.enemies)
@@ -83,24 +85,31 @@ public class EnemySpawner : MonoBehaviour
         isSpawning = true;
     }
 
-    private IEnumerator SpawnWave(WaveConfig.EnemySpawnInfo enemyInfo)
+    public void SpawnWaveFromSinglePoint(WaveConfig.Wave wave, Vector3 spawnPoint)
+    {
+        foreach (var enemyInfo in wave.enemies)
+        {
+            StartCoroutine(SpawnWave(enemyInfo, spawnPoint));
+        }
+    }
+
+    private IEnumerator SpawnWave(WaveConfig.EnemySpawnInfo enemyInfo, Vector3? spawnPoint = null)
     {
         for (int i = 0; i < enemyInfo.quantity; i++)
         {
-            SpawnEnemy(enemyInfo.enemyPrefab, enemyInfo.difficulty);
+            SpawnEnemy(enemyInfo.enemyPrefab, enemyInfo.difficulty, spawnPoint);
             yield return new WaitForSeconds(0.05f); // Delay between each enemy spawn within the wave
         }
     }
 
-
-    private void SpawnEnemy(GameObject enemyPrefab, float difficulty)
+    private void SpawnEnemy(GameObject enemyPrefab, float difficulty, Vector3? position = null)
     {
         int randomSpawnPointID = Random.Range(0, spawnPoints.Count);
-        GameObject spawnedEnemy = Instantiate(enemyPrefab, spawnPoints[randomSpawnPointID].position, Quaternion.identity);
-        Enemy enemy = spawnedEnemy.GetComponent<Enemy>();
+        GameObject spawnedEnemy = Instantiate(enemyPrefab, position?? spawnPoints[randomSpawnPointID].position, Quaternion.identity);
+        Enemy.Enemy enemy = spawnedEnemy.GetComponent<Enemy.Enemy>();
         enemy.SetDifficulty(difficulty);
         _enemies.Add(enemy);
-        enemy.Init(spawnPoints[randomSpawnPointID].position, basePoints[randomSpawnPointID].position, tilemap);
+        enemy.Init(position?? spawnPoints[randomSpawnPointID].position, basePoints[randomSpawnPointID].position, tilemap);
     }
 
     public void RecalculatePaths()
@@ -116,7 +125,7 @@ public class EnemySpawner : MonoBehaviour
         return _pathfinding.FindPath(spawnPoints[0].position, basePoints[0].position) != null;
     }
 
-    public void RemoveEnemy(Enemy enemy)
+    public void RemoveEnemy(Enemy.Enemy enemy)
     {
         _enemies.Remove(enemy);
     }

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2808361306915742750}
   - component: {fileID: 263146849661004820}
   - component: {fileID: 5415405362984598979}
-  - component: {fileID: 6600568104970691431}
+  - component: {fileID: 2246169598469354867}
   m_Layer: 7
   m_Name: Fast Enemy
   m_TagString: Enemy
@@ -97,7 +97,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &6600568104970691431
+--- !u!114 &2246169598469354867
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -106,13 +106,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 1655209499408274660}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e207c10ed6a27485e98382d43cf4330e, type: 3}
+  m_Script: {fileID: 11500000, guid: a64c8dad2464fb52782889077bd2b59e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 5415405362984598979}
   turretMask:
     serializedVersion: 2
     m_Bits: 64
+  damageToBase: 1
+  moveSpeed: 2
+  maxHealth: 35
+  reward: 1
 --- !u!1 &6186165578543394917
 GameObject:
   m_ObjectHideFlags: 0
@@ -184,7 +188,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -348761027
-  m_SortingLayer: 2
+  m_SortingLayer: 5
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 066c3a79c009342d18dee3557bdda2d4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

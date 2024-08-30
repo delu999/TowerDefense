@@ -113,7 +113,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4250398985305106869}
   - component: {fileID: 4010711281664444237}
-  - component: {fileID: 3137494426200331573}
+  - component: {fileID: 3727595552069347528}
   m_Layer: 6
   m_Name: Wall
   m_TagString: Turret
@@ -183,7 +183,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &3137494426200331573
+--- !u!114 &3727595552069347528
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -192,15 +192,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 6772062096461808707}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d13e3b3d7e74a4a7e8dad9c27dfbe890, type: 3}
+  m_Script: {fileID: 11500000, guid: 5a94ed05366bb4022991dc6021d86042, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 0}
-  enemyMask:
-    serializedVersion: 2
-    m_Bits: 0
-  firingPoint: {fileID: 0}
-  turretRotationPoint: {fileID: 0}
   removeUI: {fileID: 4066001810113067969}
 --- !u!1 &7856572312470366900
 GameObject:

@@ -440,6 +440,11 @@ MonoBehaviour:
   turretRotationPoint: {fileID: 653856609257066120}
   removeUI: {fileID: 5033272619416220737}
   rangePrefab: {fileID: 4779790481646681720, guid: b708f84e5339841ae9496e0147575476, type: 3}
+  name: Freeze Turret
+  Range: 1.5
+  FireRate: 0.5
+  Damage: 0.1
+  freezeTime: 1
 --- !u!1 &6822572585875879879
 GameObject:
   m_ObjectHideFlags: 0
