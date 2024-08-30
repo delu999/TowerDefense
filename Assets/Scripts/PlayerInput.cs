@@ -62,12 +62,8 @@ public class PlayerInput : MonoBehaviour
         var cellPosCentered = ground.GetCellCenterWorld(cellPosDefault);
 
         // Do not allow to put turret on spawn, base and decorations
-        if (ground.GetColliderType(cellPosDefault) 
-            != UnityEngine.Tilemaps.Tile.ColliderType.Sprite)
-        {
-            DisplayAlert("Can't place here!");
-            return;
-        }
+        if (ground.GetColliderType(cellPosDefault)
+            != UnityEngine.Tilemaps.Tile.ColliderType.Sprite) return;
 
         var turretCost = shopItems[_spawnID].cost;
         if (CurrencyManager.Instance.CanSpendCurrency(turretCost) && CanPlaceTurret(cellPosCentered))
@@ -183,7 +179,7 @@ public class PlayerInput : MonoBehaviour
 
     private IEnumerator HideAlert()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(3f);
         alertPanel.SetActive(false);
     }
 

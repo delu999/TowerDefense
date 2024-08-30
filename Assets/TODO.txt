@@ -1,5 +1,3 @@
---- mostrare messaggio (ad esempio "Stuck") quando si mettete una torretta in un posto che blocca il path
-  # fatto, ma da sistemare, va sotto le decorazioni + mostra il can't place anche se il mouse è fuori dalla zona di gioco (???) (forse dovremmo skippare il click se non é su un tile della mappa)
 
 -- refactoring di enemy
 

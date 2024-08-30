@@ -83,20 +83,6 @@ public class EnemySpawner : MonoBehaviour
         isSpawning = true;
     }
 
-    // private IEnumerator SpawnWaves()
-    // {
-    //     foreach (var wave in waveConfig.waves)
-    //     {
-    //         CurrentWave++;
-    //         foreach (var enemyInfo in wave.enemies)
-    //         {
-    //             yield return StartCoroutine(SpawnWave(enemyInfo));
-    //         }
-    //         yield return new WaitForSeconds(spawnInterval);
-    //     }
-    // }
-
-
     private IEnumerator SpawnWave(WaveConfig.EnemySpawnInfo enemyInfo)
     {
         for (int i = 0; i < enemyInfo.quantity; i++)

@@ -28,7 +28,7 @@ public class MissileBullet : Bullet
     {
         List<Enemy> enemiesInImpactArea = new List<Enemy>(); 
         RaycastHit2D[] hits =
-            Physics2D.CircleCastAll(transform.position, impactArea, (Vector2)transform.position, 0f, enemyMask);
+            Physics2D.CircleCastAll(transform.position, impactArea, transform.position, 0f, enemyMask);
 
         if (hits.Length > 0)
         {

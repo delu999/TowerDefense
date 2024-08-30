@@ -1,9 +1,10 @@
 using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class CurrencyManager : MonoBehaviour
 {
-    [SerializeField] public int statingCurrency = 50;
+    [FormerlySerializedAs("statingCurrency")] [SerializeField] public int startingCurrency = 50;
     
     public static CurrencyManager Instance { get; private set; }
     public int Balance { get; private set; }
@@ -16,7 +17,7 @@ public class CurrencyManager : MonoBehaviour
         }
         else
         {
-            Balance = statingCurrency;
+            Balance = startingCurrency;
             Instance = this;
             // DontDestroyOnLoad(gameObject);
         }

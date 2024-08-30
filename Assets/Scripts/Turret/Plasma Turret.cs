@@ -6,7 +6,7 @@ public class PlasmaTurret : Turret
         cost = 15;
         range = 5f;
         fireRate = 4f; // Fast speed
-        damage = 5;
+        damage = 3;
     }
     
     public override float GetRange()

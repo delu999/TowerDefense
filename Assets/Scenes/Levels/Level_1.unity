@@ -933,8 +933,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 915729935}
-  - {fileID: 864301160}
   - {fileID: 435474187}
+  - {fileID: 864301160}
   m_Father: {fileID: 1976177612}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
@@ -2719,15 +2719,15 @@ MonoBehaviour:
   - prefab: {fileID: 6772062096461808707, guid: 74e564967c64145e78166807efb5f5bc, type: 3}
     image: {fileID: 106207534}
     cost: 2
-    description: A wall that block enemies
+    description: A wall that blocks enemies
   - prefab: {fileID: 6772062096461808707, guid: d2faae2c837703a63b7c67ed4a73795b, type: 3}
     image: {fileID: 497728690}
     cost: 5
-    description: Basic gun turret
+    description: Basic gun turret. Target ground enemies
   - prefab: {fileID: 6772062096461808707, guid: 8b7f6690d219d405fa69dda36af63c48, type: 3}
     image: {fileID: 806592455}
     cost: 15
-    description: Quick firing turret
+    description: Quick firing turret. Target all enemies
   - prefab: {fileID: 6772062096461808707, guid: c3ae002b55ec548d6bf2802c9fff7ad8, type: 3}
     image: {fileID: 1048703945}
     cost: 20
@@ -2735,11 +2735,11 @@ MonoBehaviour:
   - prefab: {fileID: 6772062096461808707, guid: 79624f3be947847a4b59d758df50b949, type: 3}
     image: {fileID: 1122941356}
     cost: 30
-    description: Turret that fires 4 missiles at a time
+    description: Turret that fires 4 missiles at a time. Tagets air enemies
   - prefab: {fileID: 6772062096461808707, guid: a43116c71c514491db3bb4cbf86dc722, type: 3}
     image: {fileID: 1715480599}
     cost: 40
-    description: Damages and freezes enemies to slow them down
+    description: Damages and freezes ground enemies to slow them down
   invisibleTurretPrefab: {fileID: 1524516003829438954, guid: 792295eb0b77544eda2832078b5f8f27, type: 3}
   ground: {fileID: 1340129216}
   previewColorCanPlace: {r: 0, g: 1, b: 0, a: 0.25}
@@ -2952,7 +2952,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.11764706, g: 0.11764706, b: 0.11764706, a: 0.5019608}
+  m_Color: {r: 0.11764706, g: 0.11764706, b: 0.11764706, a: 0.7529412}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3682,7 +3682,7 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 3
-  m_Spacing: -10
+  m_Spacing: -30
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 0
@@ -4020,7 +4020,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee9f44856dc7f407f9af3af9ae35c528, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  statingCurrency: 20
+  startingCurrency: 20
 --- !u!114 &964998659
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4564,7 +4564,7 @@ GameObject:
   - component: {fileID: 1178695524}
   - component: {fileID: 1178695523}
   - component: {fileID: 1178695525}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Decorations
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7659,7 +7659,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Select a turret
+  m_text: Select an item
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -9180,7 +9180,7 @@ Canvas:
   m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 0
+  m_SortingLayerID: 1723755547
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!224 &1976177612
@@ -9373,7 +9373,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 4
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
