@@ -84,4 +84,4 @@ MonoBehaviour:
   - enemies:
     - enemyPrefab: {fileID: 1655209499408274660, guid: 7bcc080c73d994d32ba89db4c3ac87db, type: 3}
       quantity: 1
-      difficulty: 0.01
+      difficulty: 0.02
