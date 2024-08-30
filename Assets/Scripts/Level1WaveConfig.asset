@@ -26,37 +26,37 @@ MonoBehaviour:
       difficulty: 1
   - enemies:
     - enemyPrefab: {fileID: 1655209499408274660, guid: 90fc838bec66c4c54983eec600b5fb5b, type: 3}
-      quantity: 20
+      quantity: 5
       difficulty: 1
     - enemyPrefab: {fileID: 1655209499408274660, guid: ed386d334b00bcc3285138fd8919ad91, type: 3}
-      quantity: 20
+      quantity: 10
       difficulty: 1
   - enemies:
     - enemyPrefab: {fileID: 1655209499408274660, guid: 90fc838bec66c4c54983eec600b5fb5b, type: 3}
-      quantity: 20
-      difficulty: 4
+      quantity: 5
+      difficulty: 1
     - enemyPrefab: {fileID: 1655209499408274660, guid: ed386d334b00bcc3285138fd8919ad91, type: 3}
-      quantity: 20
-      difficulty: 4
+      quantity: 10
+      difficulty: 1.5
   - enemies:
     - enemyPrefab: {fileID: 1655209499408274660, guid: 5868680636dc141d7a26860ba067cc1b, type: 3}
       quantity: 20
-      difficulty: 10
+      difficulty: 5
   - enemies:
     - enemyPrefab: {fileID: 1655209499408274660, guid: 2ead0eca6d73b46c1b5edf590f615bc9, type: 3}
-      quantity: 20
-      difficulty: 3
+      quantity: 5
+      difficulty: 2
   - enemies:
     - enemyPrefab: {fileID: 1655209499408274660, guid: 6e5bb20f13baf43ff9b8b2ca82117e4a, type: 3}
-      quantity: 30
-      difficulty: 10
+      quantity: 20
+      difficulty: 5
   - enemies:
     - enemyPrefab: {fileID: 1655209499408274660, guid: ed386d334b00bcc3285138fd8919ad91, type: 3}
       quantity: 90
       difficulty: 6
     - enemyPrefab: {fileID: 1655209499408274660, guid: 2ead0eca6d73b46c1b5edf590f615bc9, type: 3}
-      quantity: 40
-      difficulty: 3
+      quantity: 5
+      difficulty: 2
   - enemies:
     - enemyPrefab: {fileID: 1655209499408274660, guid: 5868680636dc141d7a26860ba067cc1b, type: 3}
       quantity: 40
@@ -67,4 +67,4 @@ MonoBehaviour:
   - enemies:
     - enemyPrefab: {fileID: 1655209499408274660, guid: 7bcc080c73d994d32ba89db4c3ac87db, type: 3}
       quantity: 1
-      difficulty: 5
+      difficulty: 1

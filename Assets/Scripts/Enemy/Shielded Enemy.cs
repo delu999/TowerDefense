@@ -11,10 +11,10 @@ namespace Enemy
         {
             if (shieldLife >= damage)
             {
-                shieldLife -= Mathf.Max(1, damage * 0.25f);
+                shieldLife -= Mathf.Max(1, damage * 0.5f);
                 return;
             }
-            float reducedDamage = Mathf.Max(1, damage * 0.75f);
+            float reducedDamage = Mathf.Max(1, damage * 0.9f);
             base.TakeDamage(reducedDamage);
         }
     }

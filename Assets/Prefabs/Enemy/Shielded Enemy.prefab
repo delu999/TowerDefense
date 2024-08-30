@@ -115,7 +115,7 @@ MonoBehaviour:
     m_Bits: 64
   damageToBase: 1
   moveSpeed: 1
-  maxHealth: 80
+  maxHealth: 40
   reward: 1
   shieldLife: 40
 --- !u!1 &6770506441244169696
