@@ -18,6 +18,7 @@ namespace Enemy
         [SerializeField] protected float maxHealth;
         [SerializeField] protected int reward = 1;
         protected float difficulty;
+        private const float RotationSpeed = 400f;
 
         private Pathfinding _pathfinding;
         protected List<Vector2> _path;
@@ -116,7 +117,7 @@ namespace Enemy
             float angle = Mathf.Atan2(_path[_pathIndex].y - transform.position.y, _path[_pathIndex].x - transform.position.x) * Mathf.Rad2Deg - 90f;
 
             Quaternion targetRotation = Quaternion.Euler(new Vector3(0f, 0f, angle));
-            transform.rotation = targetRotation;
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, RotationSpeed * Time.deltaTime);
         }
 
         protected virtual void OnDestroy()
