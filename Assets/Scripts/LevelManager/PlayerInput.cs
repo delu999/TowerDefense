@@ -107,8 +107,8 @@ public class PlayerInput : MonoBehaviour
         
         if (_currentTurretPreview is null || _currentTurretRangePreview is null)
         {
-            _currentTurretPreview = Instantiate(turretPreviewPrefab, Vector3.zero, Quaternion.identity);
-            _currentTurretRangePreview = Instantiate(turretRangePreviewPrefab, Vector3.zero, Quaternion.identity);
+            _currentTurretPreview = Instantiate(turretPreviewPrefab, (Vector3.one * 10000), Quaternion.identity);
+            _currentTurretRangePreview = Instantiate(turretRangePreviewPrefab, (Vector3.one * 10000), Quaternion.identity);
             return;
         }
 

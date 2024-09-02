@@ -33,7 +33,7 @@ namespace Turret
                     FindTarget();
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 TargetEnemy = null;
             }

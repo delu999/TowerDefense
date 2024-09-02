@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using PathFinding;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -86,13 +87,7 @@ namespace Enemy
 
             _pathIndex = 0;
             _isRecalculatingPath = false;
-
-            if (_path == null)
-            {
-                Debug.LogWarning("Path is null, enemy might be stuck!");
-            }
-
-            Debug.Log("Path recalculated successfully.");
+            
             yield break;
         }
 
@@ -122,7 +117,7 @@ namespace Enemy
 
         protected virtual void OnDestroy()
         {
-            EnemySpawner.Instance.RemoveEnemy(this);
+            EnemySpawner.Instance?.RemoveEnemy(this);
         }
     
         public void SetDifficulty(float _difficulty)

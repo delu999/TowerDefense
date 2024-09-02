@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using PathFinding;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.UI;

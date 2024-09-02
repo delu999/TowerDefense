@@ -20,7 +20,7 @@ public class UIManager : MonoBehaviour
     private void OnGUI() {
         if(currencyUI) currencyUI.text = CurrencyManager.Instance?.Balance.ToString();
         if(waveUI) waveUI.text = EnemySpawner.Instance?.CurrentWave.ToString();
-        if(waveTimerUI) waveTimerUI.text = ((int)EnemySpawner.Instance?.CountdownUntilNextWave)+"s";
+        if(waveTimerUI) waveTimerUI.text = ((int)(EnemySpawner.Instance?.CountdownUntilNextWave?? 0))+"s";
         if(healthUI) healthUI.text = BaseLife.Instance?.GetPercentage().ToString();
         if(selectedTurretDescriptionUI) selectedTurretDescriptionUI.text = PlayerInput.Instance?.GetSelectedItemDecription();
     }

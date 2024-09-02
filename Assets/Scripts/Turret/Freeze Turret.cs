@@ -30,7 +30,7 @@ namespace Turret
                 Enemy.Enemy e;
                 try {
                     e = hit.transform.GetComponent<Enemy.Enemy>();
-                } catch (Exception ex) {
+                } catch (Exception) {
                     continue;
                 }
                 if (e is null) continue;
