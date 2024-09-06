@@ -115,7 +115,7 @@ public class EnemySpawner : MonoBehaviour
         {
             goalPositions.Add(basePoint.position);
         }
-        enemy.Init(position?? spawnPoints[randomSpawnPointID].position, goalPositions, tilemap);
+        enemy.Init(randomSpawnPointID, position?? spawnPoints[randomSpawnPointID].position, goalPositions, tilemap);
     }
 
     public void RecalculatePaths()

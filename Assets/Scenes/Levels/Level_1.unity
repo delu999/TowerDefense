@@ -2719,27 +2719,30 @@ MonoBehaviour:
   - prefab: {fileID: 6772062096461808707, guid: 74e564967c64145e78166807efb5f5bc, type: 3}
     image: {fileID: 106207534}
     cost: 2
-    description: A wall that blocks enemies
+    description: A sturdy barrier that blocks ground enemies, forcing them to find
+      alternate routes
   - prefab: {fileID: 6772062096461808707, guid: d2faae2c837703a63b7c67ed4a73795b, type: 3}
     image: {fileID: 497728690}
     cost: 5
-    description: Basic gun turret. Target ground enemies
+    description: A standard turret that engages ground enemies
   - prefab: {fileID: 6772062096461808707, guid: 8b7f6690d219d405fa69dda36af63c48, type: 3}
     image: {fileID: 806592455}
     cost: 15
-    description: Quick firing turret. Target all enemies
+    description: A high-speed turret that targets all enemy types, delivering quick
+      shots
   - prefab: {fileID: 6772062096461808707, guid: c3ae002b55ec548d6bf2802c9fff7ad8, type: 3}
     image: {fileID: 1048703945}
     cost: 20
-    description: Slow firing turret that damages an area on the ground
+    description: A powerful turret that deals area damage to ground units
   - prefab: {fileID: 6772062096461808707, guid: 79624f3be947847a4b59d758df50b949, type: 3}
     image: {fileID: 1122941356}
     cost: 25
-    description: Turret that fires 4 missiles at a time. Tagets air enemies
+    description: Fires four missiles that targets air enemies
   - prefab: {fileID: 6772062096461808707, guid: a43116c71c514491db3bb4cbf86dc722, type: 3}
     image: {fileID: 1715480599}
     cost: 30
-    description: Damages and freezes ground enemies to slow them down
+    description: Deals damage to ground enemies while freezing them, significantly
+      slowing their advance
   invisibleTurretPrefab: {fileID: 1524516003829438954, guid: 792295eb0b77544eda2832078b5f8f27, type: 3}
   ground: {fileID: 1340129216}
   previewColorCanPlace: {r: 0, g: 1, b: 0, a: 0.25}
@@ -4020,7 +4023,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee9f44856dc7f407f9af3af9ae35c528, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingCurrency: 1000
+  startingCurrency: 20
 --- !u!114 &964998659
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7686,8 +7689,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 22
-  m_fontSizeBase: 20
+  m_fontSize: 16
+  m_fontSizeBase: 16
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

@@ -121,17 +121,17 @@ MonoBehaviour:
   enemiseInsideTank:
     enemies:
     - enemyPrefab: {fileID: 1655209499408274660, guid: 6e5bb20f13baf43ff9b8b2ca82117e4a, type: 3}
-      quantity: 2
-      difficulty: 2
+      quantity: 4
+      difficulty: 6
     - enemyPrefab: {fileID: 1655209499408274660, guid: 5868680636dc141d7a26860ba067cc1b, type: 3}
       quantity: 4
-      difficulty: 4
+      difficulty: 6
     - enemyPrefab: {fileID: 1655209499408274660, guid: ed386d334b00bcc3285138fd8919ad91, type: 3}
       quantity: 4
       difficulty: 6
     - enemyPrefab: {fileID: 1655209499408274660, guid: 90fc838bec66c4c54983eec600b5fb5b, type: 3}
-      quantity: 1
-      difficulty: 4
+      quantity: 4
+      difficulty: 6
 --- !u!1 &2322648486663484164
 GameObject:
   m_ObjectHideFlags: 0

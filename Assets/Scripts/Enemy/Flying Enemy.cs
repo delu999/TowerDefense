@@ -10,7 +10,7 @@ namespace Enemy
         protected override IEnumerator CalculatePathCoroutine()
         {
             // FlyingEnemy ignore obstacles and go directly to the target 
-            _path = new List<Vector2> { _targetPositions[0] };
+            _path = new List<Vector2> { _targetPositions[SpawnId] };
             yield break;
         }
     }

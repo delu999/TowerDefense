@@ -27,12 +27,14 @@ namespace Enemy
         private bool _isRecalculatingPath;
         protected float _currentHealth;
         private int _pathIndex;
+        protected int SpawnId;
 
-        public void Init(Vector2 spawnPosition, List<Vector2> targetPositions, Tilemap ground)
+        public void Init(int spawnID, Vector2 spawnPosition, List<Vector2> targetPositions, Tilemap ground)
         {
             _currentHealth = maxHealth;
             transform.position = spawnPosition;
             _targetPositions = targetPositions;
+            SpawnId = spawnID;
 
             _pathfinding = new Pathfinding(turretMask, ground);
             StartCoroutine(CalculatePathCoroutine());
