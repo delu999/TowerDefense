@@ -110,7 +110,12 @@ public class EnemySpawner : MonoBehaviour
         Enemy.Enemy enemy = spawnedEnemy.GetComponent<Enemy.Enemy>();
         enemy.SetDifficulty(difficulty);
         _enemies.Add(enemy);
-        enemy.Init(position?? spawnPoints[randomSpawnPointID].position, basePoints[randomSpawnPointID].position, tilemap);
+        List<Vector2> goalPositions = new List<Vector2>();
+        foreach (var basePoint in basePoints)
+        {
+            goalPositions.Add(basePoint.position);
+        }
+        enemy.Init(position?? spawnPoints[randomSpawnPointID].position, goalPositions, tilemap);
     }
 
     public void RecalculatePaths()
@@ -123,7 +128,7 @@ public class EnemySpawner : MonoBehaviour
 
     public bool IsPathAvailable()
     {
-        return _pathfinding.FindPath(spawnPoints[0].position, basePoints[0].position) != null;
+        return _pathfinding.FindPath(spawnPoints[0].position, new List<Vector2>() { basePoints[0].position }) != null;
     }
 
     public void RemoveEnemy(Enemy.Enemy enemy)

@@ -4020,7 +4020,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee9f44856dc7f407f9af3af9ae35c528, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingCurrency: 20
+  startingCurrency: 1000
 --- !u!114 &964998659
 MonoBehaviour:
   m_ObjectHideFlags: 0

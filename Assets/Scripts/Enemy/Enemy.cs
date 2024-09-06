@@ -23,16 +23,16 @@ namespace Enemy
 
         private Pathfinding _pathfinding;
         protected List<Vector2> _path;
-        protected Vector2 _targetPosition;
+        protected List<Vector2> _targetPositions;
         private bool _isRecalculatingPath;
         protected float _currentHealth;
         private int _pathIndex;
 
-        public void Init(Vector2 spawnPosition, Vector2 targetPosition, Tilemap ground)
+        public void Init(Vector2 spawnPosition, List<Vector2> targetPositions, Tilemap ground)
         {
             _currentHealth = maxHealth;
             transform.position = spawnPosition;
-            _targetPosition = targetPosition;
+            _targetPositions = targetPositions;
 
             _pathfinding = new Pathfinding(turretMask, ground);
             StartCoroutine(CalculatePathCoroutine());
@@ -83,7 +83,7 @@ namespace Enemy
         protected virtual IEnumerator CalculatePathCoroutine()
         {
             _isRecalculatingPath = true;
-            _path = _pathfinding.FindPath(transform.position, _targetPosition);
+            _path = _pathfinding.FindPath(transform.position, _targetPositions);
 
             _pathIndex = 0;
             _isRecalculatingPath = false;
