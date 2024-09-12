@@ -126,9 +126,9 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
-    public bool IsPathAvailable()
+    public bool IsPathAvailable(Vector3? start = null, Vector3? end = null)
     {
-        return _pathfinding.FindPath(spawnPoints[0].position, new List<Vector2>() { basePoints[0].position }) != null;
+        return _pathfinding.FindPath(start?? spawnPoints[0].position, new List<Vector2>() { end?? basePoints[0].position }) != null;
     }
 
     public void RemoveEnemy(Enemy.Enemy enemy)

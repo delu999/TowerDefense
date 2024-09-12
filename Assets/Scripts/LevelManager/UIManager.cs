@@ -46,6 +46,11 @@ public class UIManager : MonoBehaviour
         {
             PlayerInput.Instance.Restore();
         }
+        
+        if (FloodFindManager.Instance is not null)
+        {
+            FloodFindManager.Instance.Restore();
+        }
 
         SceneManager.LoadScene("MainMenuScene");
     }

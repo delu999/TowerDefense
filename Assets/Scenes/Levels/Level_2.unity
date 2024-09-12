@@ -3989,6 +3989,7 @@ GameObject:
   - component: {fileID: 964998658}
   - component: {fileID: 964998659}
   - component: {fileID: 964998660}
+  - component: {fileID: 964998661}
   m_Layer: 0
   m_Name: LevelManger
   m_TagString: Untagged
@@ -4055,6 +4056,22 @@ MonoBehaviour:
   healthUI: {fileID: 1530799064}
   selectedTurretDescriptionUI: {fileID: 1421076323}
   goToMenuButton: {fileID: 370646638}
+--- !u!114 &964998661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 964998655}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f29740199f8b4043936be5d6a73cf97b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ground: {fileID: 1340129216}
+  enemyMask:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!1 &997242420
 GameObject:
   m_ObjectHideFlags: 0

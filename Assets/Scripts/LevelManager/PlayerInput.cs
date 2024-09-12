@@ -69,7 +69,7 @@ public class PlayerInput : MonoBehaviour
         if (CurrencyManager.Instance.CanSpendCurrency(turretCost) && CanPlaceTurret(cellPosCentered))
         {
             GameObject g = Instantiate(shopItems[_spawnID].prefab, cellPosCentered, Quaternion.identity);
-            if (EnemySpawner.Instance.IsPathAvailable())
+            if (TurretBlockEnemies(cellPosCentered))
             {
                 Instantiate(shopItems[_spawnID].prefab, cellPosCentered, Quaternion.identity);
                 CurrencyManager.Instance.SpendCurrency(turretCost);
@@ -144,6 +144,19 @@ public class PlayerInput : MonoBehaviour
     private bool CanPlaceTurret(Vector3 position)
     {
         return Physics2D.OverlapCircle(position, 0.25f, colliderMasks) is null;
+    }
+
+    private bool TurretBlockEnemies(Vector3 position)
+    {
+        // Check if exists at least a path from start to end
+        if (!EnemySpawner.Instance.IsPathAvailable()) return false;
+        // Check if some enemy would be trapped after turret placement
+        List<Vector3Int> enemyCells = FloodFindManager.Instance.FloodFind(ground.WorldToCell(position));    // gives cells that contains at least one enemies
+        foreach (var enemyCell in enemyCells)
+        {
+            if (!EnemySpawner.Instance.IsPathAvailable(ground.CellToWorld(enemyCell))) return false;
+        }
+        return true;
     }
     
     public void SelectTower(int id)
